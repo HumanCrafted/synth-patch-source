@@ -69,7 +69,7 @@ Folder names are lowercase kebab-case. Only `synth.json` and `assets/` are part 
 
 A package is rejected on import when:
 
-- `format` isn't `synthjson/1` (or the old `synthmd/1`)
+- `format` isn't `synthjson/1`
 - `name`, `manufacturer` or `model` is missing or blank
 - `frame` or `thumbnail` isn't a path starting with `assets/` (or contains `..`)
 - `control_config` is missing or has no controls
