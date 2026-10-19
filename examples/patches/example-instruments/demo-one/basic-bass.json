@@ -1,0 +1,19 @@
+{
+  "format": "patchjson/1",
+  "name": "Basic Bass",
+  "synth": "example-instruments-demo-one",
+  "description": "A round saw bass with a short filter pluck.",
+  "tags": ["bass", "starter"],
+  "controls": {
+    "knobs": {
+      "Filter Cutoff": 0.333,
+      "Filter Resonance": 0.25,
+      "Filter Envelope Amount": 0.5
+    },
+    "rotarySwitches": { "Oscillator Range": "16'" },
+    "toggles": { "Oscillator Wave": "Saw" },
+    "sliders": { "Filter Envelope Decay": 0.3 }
+  },
+  "cables": [],
+  "notes": "Play it low. The envelope opens the filter on every note through the normalled connection, so no cables are needed.\n\n- Raise **Decay** for a longer pluck.\n- Turn **Resonance** past 2:00 for a squelchier bass."
+}

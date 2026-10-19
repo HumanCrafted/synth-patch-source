@@ -1,0 +1,127 @@
+{
+  "format": "patchjson/1",
+  "name": "Example Instruments Demo One patches",
+  "synthesizer": "example-instruments-demo-one",
+  "synth": "example-instruments-demo-one",
+  "description": "3 patches for the Example Instruments Demo One from https://example.com/demo-one/owners-guide.pdf.",
+  "authors": [
+    "A. Example"
+  ],
+  "patches": [
+    {
+      "format": "patchjson/1",
+      "name": "Basic Bass",
+      "synth": "example-instruments-demo-one",
+      "description": "A round saw bass with a short filter pluck.",
+      "tags": [
+        "bass",
+        "starter"
+      ],
+      "controls": {
+        "knobs": {
+          "Filter Cutoff": 0.333,
+          "Filter Resonance": 0.25,
+          "Filter Envelope Amount": 0.5
+        },
+        "rotarySwitches": {
+          "Oscillator Range": "16'"
+        },
+        "toggles": {
+          "Oscillator Wave": "Saw"
+        },
+        "sliders": {
+          "Filter Envelope Decay": 0.3
+        }
+      },
+      "cables": [],
+      "notes": "A round saw bass with a short filter pluck.\n\nPlay it low. The envelope opens the filter on every note through the normalled connection, so no cables are needed.\n\n- Raise **Decay** for a longer pluck.\n- Turn **Resonance** past 2:00 for a squelchier bass."
+    },
+    {
+      "format": "patchjson/1",
+      "name": "Clocked Pluck",
+      "synth": "example-instruments-demo-one",
+      "description": "A pitched pluck that retriggers from the clock and sweeps its own pitch. Source: Demo One Owner's Guide, by A. Example.",
+      "tags": [
+        "pluck",
+        "sequence"
+      ],
+      "controls": {
+        "knobs": {
+          "Oscillator Pitch": -0.25,
+          "Oscillator Pulse Width": 0.75,
+          "Filter Cutoff": 0.556,
+          "Filter Envelope Amount": -0.4
+        },
+        "rotarySwitches": {
+          "Oscillator Range": "8'"
+        },
+        "toggles": {
+          "Oscillator Wave": "Square"
+        },
+        "sliders": {
+          "Filter Envelope Decay": 0.15
+        },
+        "rotaryEncoders": {
+          "Tempo": 2.5
+        },
+        "buttons": {
+          "Hold": true
+        },
+        "leds": {
+          "Clock Indicator": "On"
+        }
+      },
+      "cables": [
+        {
+          "from": "Envelope Output",
+          "to": "Pitch CV Input",
+          "color": "Signal Orange"
+        },
+        {
+          "from": "Oscillator Output",
+          "to": "Cutoff CV Input",
+          "color": "Control Blue"
+        }
+      ],
+      "notes": "A pitched pluck that retriggers from the clock and sweeps its own pitch.\n\nWith **Hold** on, the clock keeps retriggering the envelope at the **Tempo** rate.\n\n- The negative **Env Amount** closes the filter as the envelope rises, so each note starts dark.\n- Audio-rate FM from the oscillator into the cutoff adds the grit; pull the blue cable for a cleaner tone.\n\nSource: [Demo One Owner's Guide](https://example.com/demo-one/owners-guide.pdf), p. 12, by A. Example.",
+      "source": {
+        "title": "Demo One Owner's Guide, Patch Ideas: Clocked Pluck (p. 12)",
+        "url": "https://example.com/demo-one/owners-guide.pdf",
+        "author": "A. Example",
+        "license": "CC-BY-4.0",
+        "attribution": "Patch idea from the Demo One Owner's Guide, by A. Example (CC BY 4.0).",
+        "retrieved": "2026-10-19"
+      }
+    },
+    {
+      "format": "patchjson/1",
+      "name": "Resonant Whistle",
+      "synth": "example-instruments-demo-one",
+      "description": "The filter at full resonance, played as a sine-like whistle.",
+      "tags": [
+        "lead",
+        "self-oscillation"
+      ],
+      "controls": {
+        "knobs": {
+          "Filter Cutoff": 0.667,
+          "Filter Resonance": 1,
+          "Filter Envelope Amount": 0
+        },
+        "toggles": {
+          "Oscillator Wave": "Triangle"
+        },
+        "sliders": {
+          "Filter Envelope Decay": 0.8
+        }
+      },
+      "cables": [
+        {
+          "from": "Envelope Output",
+          "to": "Cutoff CV Input"
+        }
+      ],
+      "notes": "The filter at full resonance, played as a sine-like whistle.\n\nAt full **Resonance** the filter rings on its own. The cable lets the envelope push the whistle's pitch up on each note; leave **Env Amount** at center so only the cable moves it."
+    }
+  ]
+}

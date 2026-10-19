@@ -1,0 +1,20 @@
+{
+  "format": "patchjson/1",
+  "name": "Resonant Whistle",
+  "synth": "example-instruments-demo-one",
+  "description": "The filter at full resonance, played as a sine-like whistle.",
+  "tags": ["lead", "self-oscillation"],
+  "controls": {
+    "knobs": {
+      "Filter Cutoff": 0.667,
+      "Filter Resonance": 1,
+      "Filter Envelope Amount": 0
+    },
+    "toggles": { "Oscillator Wave": "Triangle" },
+    "sliders": { "Filter Envelope Decay": 0.8 }
+  },
+  "cables": [
+    { "from": "Envelope Output", "to": "Cutoff CV Input" }
+  ],
+  "notes": "At full **Resonance** the filter rings on its own. The cable lets the envelope push the whistle's pitch up on each note; leave **Env Amount** at center so only the cable moves it."
+}

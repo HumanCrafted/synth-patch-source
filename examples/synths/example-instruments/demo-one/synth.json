@@ -1,0 +1,342 @@
+{
+  "format": "synthjson/1",
+  "slug": "example-instruments-demo-one",
+  "name": "Example Instruments Demo One",
+  "manufacturer": "Example Instruments",
+  "model": "Demo One",
+  "description": "Fictional Semi-Modular Synthesizer with One Oscillator, Low-Pass Filter, Decay Envelope and 6-Point Patch Bay",
+  "category": "Semi-Modular",
+  "tags": [
+    "analog",
+    "semi-modular"
+  ],
+  "manufacturer_url": "https://example.com/demo-one",
+  "manual_url": null,
+  "is_listed": false,
+  "verified": false,
+  "featured": false,
+  "frame": "assets/demo1-frame-2268w.svg",
+  "thumbnail": "assets/demo1-thumbnail-2268w.png",
+  "placement": "assets/demo1-placement-2268w.svg",
+  "source": {
+    "figma_section": "Demo One",
+    "notes": "A made-up synth for the format docs. Not a real instrument.",
+    "no_manual": "Fictional synth; there is no manual."
+  },
+  "control_config": {
+    "circle_1": {
+      "x": 200,
+      "y": 330,
+      "name": "Oscillator Range",
+      "type": "rotary-switch",
+      "config": {
+        "size": 224,
+        "graphics": [
+          {
+            "url": "assets/demo1-rotary-switch-224w=neg45.svg",
+            "filename": "demo1-rotary-switch-224w=neg45.svg"
+          },
+          {
+            "url": "assets/demo1-rotary-switch-224w=neg15.svg",
+            "filename": "demo1-rotary-switch-224w=neg15.svg"
+          },
+          {
+            "url": "assets/demo1-rotary-switch-224w=15.svg",
+            "filename": "demo1-rotary-switch-224w=15.svg"
+          },
+          {
+            "url": "assets/demo1-rotary-switch-224w=45.svg",
+            "filename": "demo1-rotary-switch-224w=45.svg"
+          }
+        ],
+        "positions": 4,
+        "positionNames": [
+          "32'",
+          "16'",
+          "8'",
+          "4'"
+        ],
+        "switchMode": "reciprocating"
+      }
+    },
+    "circle_2": {
+      "x": 470,
+      "y": 330,
+      "name": "Oscillator Pitch",
+      "type": "knob",
+      "config": {
+        "size": 212,
+        "graphic": {
+          "url": "assets/demo1-knob-212w=default.svg",
+          "filename": "demo1-knob-212w=default.svg"
+        },
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "valueRange": "bipolar"
+      }
+    },
+    "circle_3": {
+      "x": 775,
+      "y": 330,
+      "name": "Filter Cutoff",
+      "type": "knob",
+      "config": {
+        "size": 212,
+        "graphic": {
+          "url": "assets/demo1-knob-212w=default.svg",
+          "filename": "demo1-knob-212w=default.svg"
+        },
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "valueRange": "unipolar"
+      }
+    },
+    "circle_4": {
+      "x": 1065,
+      "y": 330,
+      "name": "Filter Resonance",
+      "type": "knob",
+      "config": {
+        "size": 212,
+        "graphic": {
+          "url": "assets/demo1-knob-212w=default.svg",
+          "filename": "demo1-knob-212w=default.svg"
+        },
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "valueRange": "unipolar"
+      }
+    },
+    "circle_5": {
+      "x": 1390,
+      "y": 330,
+      "name": "Tempo",
+      "type": "rotary-encoder",
+      "config": {
+        "size": 91,
+        "graphic": {
+          "url": "assets/demo1-knob-91w=default.svg",
+          "filename": "demo1-knob-91w=default.svg"
+        },
+        "sensitivity": 0.005
+      }
+    },
+    "circle_6": {
+      "x": 1760,
+      "y": 330,
+      "name": "Pitch CV Input",
+      "type": "input-jack",
+      "config": {
+        "size": 106,
+        "type": "input",
+        "graphic": {
+          "url": "assets/demo1-jack-106w=input.svg",
+          "filename": "demo1-jack-106w=input.svg"
+        }
+      }
+    },
+    "circle_7": {
+      "x": 2040,
+      "y": 330,
+      "name": "Oscillator Output",
+      "type": "output-jack",
+      "config": {
+        "size": 106,
+        "type": "output",
+        "graphic": {
+          "url": "assets/demo1-jack-106w=output.svg",
+          "filename": "demo1-jack-106w=output.svg"
+        }
+      }
+    },
+    "circle_8": {
+      "x": 1390,
+      "y": 520,
+      "name": "Clock Indicator",
+      "type": "led",
+      "config": {
+        "width": 52,
+        "height": 52,
+        "graphics": [
+          {
+            "url": "assets/demo1-led-52w=inactive.svg",
+            "filename": "demo1-led-52w=inactive.svg"
+          },
+          {
+            "url": "assets/demo1-led-52w=active.svg",
+            "filename": "demo1-led-52w=active.svg"
+          }
+        ],
+        "ledMode": "continuous",
+        "numStates": 2,
+        "positionNames": [
+          "Off",
+          "On"
+        ]
+      }
+    },
+    "circle_9": {
+      "x": 1760,
+      "y": 520,
+      "name": "Cutoff CV Input",
+      "type": "input-jack",
+      "config": {
+        "size": 106,
+        "type": "input",
+        "graphic": {
+          "url": "assets/demo1-jack-106w=input.svg",
+          "filename": "demo1-jack-106w=input.svg"
+        }
+      }
+    },
+    "circle_10": {
+      "x": 2040,
+      "y": 520,
+      "name": "Envelope Output",
+      "type": "output-jack",
+      "config": {
+        "size": 106,
+        "type": "output",
+        "graphic": {
+          "url": "assets/demo1-jack-106w=output.svg",
+          "filename": "demo1-jack-106w=output.svg"
+        }
+      }
+    },
+    "circle_11": {
+      "x": 1760,
+      "y": 710,
+      "name": "Gate Input",
+      "type": "input-jack",
+      "config": {
+        "size": 106,
+        "type": "input",
+        "graphic": {
+          "url": "assets/demo1-jack-106w=input.svg",
+          "filename": "demo1-jack-106w=input.svg"
+        }
+      }
+    },
+    "circle_12": {
+      "x": 2040,
+      "y": 710,
+      "name": "Main Output",
+      "type": "output-jack",
+      "config": {
+        "size": 106,
+        "type": "output",
+        "graphic": {
+          "url": "assets/demo1-jack-106w=output.svg",
+          "filename": "demo1-jack-106w=output.svg"
+        }
+      }
+    },
+    "circle_13": {
+      "x": 200,
+      "y": 720,
+      "name": "Oscillator Wave",
+      "type": "toggle",
+      "config": {
+        "size": 96,
+        "graphics": [
+          {
+            "url": "assets/demo1-toggle-96w=left.svg",
+            "filename": "demo1-toggle-96w=left.svg"
+          },
+          {
+            "url": "assets/demo1-toggle-96w=middle.svg",
+            "filename": "demo1-toggle-96w=middle.svg"
+          },
+          {
+            "url": "assets/demo1-toggle-96w=right.svg",
+            "filename": "demo1-toggle-96w=right.svg"
+          }
+        ],
+        "positions": 3,
+        "positionNames": [
+          "Saw",
+          "Triangle",
+          "Square"
+        ]
+      }
+    },
+    "circle_14": {
+      "x": 470,
+      "y": 720,
+      "name": "Oscillator Pulse Width",
+      "type": "knob",
+      "config": {
+        "size": 91,
+        "graphic": {
+          "url": "assets/demo1-knob-91w=default.svg",
+          "filename": "demo1-knob-91w=default.svg"
+        },
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "valueRange": "unipolar"
+      }
+    },
+    "circle_15": {
+      "x": 775,
+      "y": 720,
+      "name": "Filter Envelope Amount",
+      "type": "knob",
+      "config": {
+        "size": 91,
+        "graphic": {
+          "url": "assets/demo1-knob-91w=default.svg",
+          "filename": "demo1-knob-91w=default.svg"
+        },
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "valueRange": "bipolar"
+      }
+    },
+    "circle_16": {
+      "x": 1065,
+      "y": 720,
+      "name": "Filter Envelope Decay",
+      "type": "slider",
+      "config": {
+        "width": 198,
+        "graphic": {
+          "url": "assets/demo1-slider-198w=default.svg",
+          "filename": "demo1-slider-198w=default.svg"
+        },
+        "orientation": "vertical",
+        "travelRange": 255,
+        "valueRange": "unipolar"
+      }
+    },
+    "circle_17": {
+      "x": 1390,
+      "y": 720,
+      "name": "Hold",
+      "type": "button",
+      "config": {
+        "size": 76,
+        "graphics": [
+          {
+            "url": "assets/demo1-button-76w=inactive, color=grey.svg",
+            "filename": "demo1-button-76w=inactive, color=grey.svg"
+          },
+          {
+            "url": "assets/demo1-button-76w=active, color=grey.svg",
+            "filename": "demo1-button-76w=active, color=grey.svg"
+          }
+        ],
+        "buttonType": "latching"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  }
+}
