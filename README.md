@@ -31,3 +31,9 @@ examples/
 Demo One by Example Instruments isn't a real instrument. It was drawn in the Synth Patch Figma file for these docs, with the same components and conventions as the synths in the app: 17 controls covering knobs, a rotary switch, a toggle, a fader, an encoder, an LED, a button, and a six-jack patch bay. Every file in its package is real output from that build, and its patches pass the same checks as the library's.
 
 See [Demo One](examples/synths/example-instruments/demo-one/README.md) for its controls, placement dots, and how it was built.
+
+## License
+
+The docs, the format specs and the examples (JSON, SVG and PNG files) are licensed under [CC BY 4.0](LICENSE). Use them, adapt them, build on them, including commercially; credit Synth Patch by Human Crafted LLC. The code (`examples/synths/example-instruments/demo-one/source/build_synth_json.py`) is under the [MIT License](LICENSE-CODE).
+
+Neither license covers the Synth Patch name or logo.
