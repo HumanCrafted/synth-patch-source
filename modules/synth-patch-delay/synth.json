@@ -1,0 +1,133 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-delay",
+  "name": "Synth Patch Delay",
+  "manufacturer": "Synth Patch",
+  "model": "Delay",
+  "description": "Delay module with time, feedback and mix",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Time",
+            "Feedback",
+            "Mix"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Delay Input",
+            "Delay Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "time": {
+      "name": "Time",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.6
+      }
+    },
+    "feedback": {
+      "name": "Feedback",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.42
+      }
+    },
+    "mix": {
+      "name": "Mix",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.35
+      }
+    },
+    "delay-input": {
+      "name": "Delay Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "delay-output": {
+      "name": "Delay Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "delay",
+        "type": "delay",
+        "params": {
+          "time": {
+            "control": "Time",
+            "range": [
+              0.01,
+              2
+            ],
+            "curve": "exp"
+          },
+          "feedback": {
+            "control": "Feedback",
+            "range": [
+              0,
+              0.95
+            ]
+          },
+          "mix": {
+            "control": "Mix",
+            "range": [
+              0,
+              1
+            ]
+          }
+        },
+        "inputs": {
+          "in": {
+            "jack": "Delay Input"
+          }
+        },
+        "outputs": {
+          "out": "Delay Output"
+        }
+      }
+    ]
+  }
+}

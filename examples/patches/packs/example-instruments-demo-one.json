@@ -1,7 +1,6 @@
 {
   "format": "patchjson/1",
   "name": "Example Instruments Demo One patches",
-  "synthesizer": "example-instruments-demo-one",
   "synth": "example-instruments-demo-one",
   "description": "3 patches for the Example Instruments Demo One from https://example.com/demo-one/owners-guide.pdf.",
   "authors": [

@@ -3,6 +3,7 @@
 
 Each control is (x, y, type, name, config). x and y are the placement dot
 centers in frame pixels (288 dpi), read from demo1-placement-2268w.svg.
+ENGINE is how it sounds (see docs/engine.md).
 
     python3 examples/synths/example-instruments/demo-one/source/build_synth_json.py
 """
@@ -71,6 +72,46 @@ CONTROLS = [
 ]
 
 
+# Keyboard and clock into a decay envelope, through an oscillator, ladder
+# filter and VCA. The keyboard's pitch and the envelope are wired inside the
+# synth; the jacks break in where the panel has them.
+ENGINE = {
+    "kind": "blocks",
+    "blocks": [
+        {"id": "keys", "type": "keyboard"},
+        {"id": "clock", "type": "clock", "params": {
+            "bpm": {"control": "Tempo", "turns": {"base": 120, "perTurn": 40, "min": 30, "max": 300}},
+        }},
+        {"id": "trigger", "type": "gate-or", "params": {"useB": {"control": "Hold"}}, "inputs": {"a": "keys.gate", "b": "clock.out"}},
+        {"id": "env", "type": "decay-env",
+         "params": {"decay": {"control": "Filter Envelope Decay", "range": [0.05, 8], "curve": "exp"}},
+         "inputs": {"gate": {"jack": "Gate Input", "normal": "trigger.out"}},
+         "outputs": {"out": "Envelope Output"}},
+        {"id": "vco", "type": "vco",
+         "params": {
+             "octave": {"control": "Oscillator Range", "steps": {"32'": -2, "16'": -1, "8'": 0, "4'": 1}},
+             "tune": {"control": "Oscillator Pitch", "range": [-12, 12]},
+             "wave": {"control": "Oscillator Wave", "steps": {"Saw": 0, "Triangle": 1, "Square": 2}},
+             "pulseWidth": {"control": "Oscillator Pulse Width", "range": [0.5, 0.95]},
+         },
+         "inputs": {"pitch": "keys.pitch", "pitchCv": {"jack": "Pitch CV Input"}},
+         "outputs": {"out": "Oscillator Output"}},
+        {"id": "vcf", "type": "ladder",
+         "params": {
+             "cutoff": {"control": "Filter Cutoff", "range": [20, 20480], "curve": "exp"},
+             "resonance": {"control": "Filter Resonance", "range": [0, 1.05]},
+             "envAmount": {"control": "Filter Envelope Amount", "range": [-6, 6]},
+             "keyTrack": 1,
+             "cvAmount": 1,
+         },
+         "inputs": {"in": "vco.out", "pitch": "keys.pitch", "env": "env.out", "cutoffCv": {"jack": "Cutoff CV Input"}}},
+        {"id": "vca", "type": "vca", "inputs": {"in": "vcf.out", "cv": "env.out"}, "outputs": {"out": "Main Output"}},
+    ],
+    "leds": {"Clock Indicator": {"source": "clock.out", "on": "On", "off": "Off"}},
+    "output": "vca.out",
+}
+
+
 def wizard_order(p, q):
     """The upload wizard's numbering: top to bottom, left to right when dots are within 10 px vertically."""
     if abs(p[1] - q[1]) < 10:
@@ -86,7 +127,7 @@ def main():
         control_config[f"circle_{i}"] = {"x": x, "y": y, "name": name, "type": kind, "config": json.loads(json.dumps(config))}
     control_config["cableStyle"] = {"color": "#000000", "width": 22, "curvature": 6}
     manifest = {
-        "format": "synthjson/1",
+        "format": "synthjson/2",
         "slug": "example-instruments-demo-one",
         "name": "Example Instruments Demo One",
         "manufacturer": "Example Instruments",
@@ -104,6 +145,7 @@ def main():
         "placement": "assets/demo1-placement-2268w.svg",
         "source": {"figma_section": "Demo One", "notes": "A made-up synth for the format docs. Not a real instrument.", "no_manual": "Fictional synth; there is no manual."},
         "control_config": control_config,
+        "engine": ENGINE,
     }
     (PACKAGE / "synth.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
     print(f"wrote synth.json with {len(CONTROLS)} controls")

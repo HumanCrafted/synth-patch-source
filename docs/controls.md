@@ -6,7 +6,7 @@ Every entry in `control_config` (except `cableStyle`) is a control:
 "circle_14": { "x": 470, "y": 720, "name": "Oscillator Pulse Width", "type": "knob", "config": { } }
 ```
 
-`x`, `y` is the control's center in frame pixels. `type` is one of the 14 types below, and `config` depends on it. Each type also says what a [patch](patches.md) stores for it, and under which group name.
+`x`, `y` is the control's center in frame pixels (drawn synths only; a [generated synth](synth-package.md#generated-synths) places its controls from `panel`). `type` is one of the 16 types below, and `config` depends on it. Each type also says what a [patch](patches.md) stores for it, and under which group name.
 
 | Type | Patch group | Patch value |
 | --- | --- | --- |
@@ -22,8 +22,20 @@ Every entry in `control_config` (except `cableStyle`) is a control:
 | [`key`](#key) | `keys` | `true` / `false` |
 | [`led`](#led) | `leds` | state name, or `true` / `false` |
 | [`touch-pad`](#touch-pad) | `touchPads` | `true` / `false` |
+| [`code`](#code) | `code` | the code, as a string |
 | [`input-jack`](#jacks) | (cables) | |
 | [`output-jack`](#jacks) | (cables) | |
+| [`graphic`](#graphic) | | none: artwork |
+
+`code` and `graphic` are new in `synthjson/2`.
+
+## Defaults
+
+Any control that holds a value can set `default` in its `config`: the patch value it takes when a patch leaves it out, in the same form a patch stores (`0.5`, `"8'"`, `true`). Without one, knobs, faders, wheels and encoders start at 0, switches and LEDs at their first position, joysticks at center, `code` empty, and everything else off.
+
+```json
+"config": { "graphics": "parts:rotary-switch-pointer-4pos", "positions": 4, "positionNames": ["32'", "16'", "8'", "4'"], "default": "8'" }
+```
 
 ## Size is a square
 
@@ -31,9 +43,11 @@ Knobs, encoders, sliders, toggles, rotary switches, buttons, jacks and joysticks
 
 LEDs, touch pads, keys and wheels have separate width and height fields instead.
 
+A control whose graphic is a [part](parts.md) takes its size from the part, so it needs none of these.
+
 ## Graphics
 
-`graphic` is one image. `graphics` is a list, one image per state, in the order the states are listed. Each entry is `{ "url", "filename" }` or a plain path string; see [Graphic references](synth-package.md#graphic-references).
+`graphic` is one image. `graphics` is a list, one image per state, in the order the states are listed. Each entry is `{ "url", "filename" }` or a plain path string; see [Graphic references](synth-package.md#graphic-references). Either can instead be a part name, `"parts:knob-moog-large"`, which stands for all of the part's states; see [Parts](synth-package.md#parts).
 
 The examples use Demo One's files where it has that control. For the types it doesn't have (wheel, joystick, key, touch pad, angled fader), the file names are made up.
 
@@ -59,10 +73,12 @@ The examples use Demo One's files where it has that control. For the types it do
 | `minDegree`, `maxDegree` | −135, 135 | Rotation at each end of travel, in degrees clockwise from 12 o'clock. Measured from the panel's scale. ±150° is the most common. |
 | `valueRange` | `unipolar` | `unipolar` (0 to 1) or `bipolar` (−1 to 1, 0 at center). Bipolar is for knobs whose center is zero: tuning, ± amount or depth, attenuverters. |
 | `sensitivity` | 0.005 | Value change per pixel of drag. |
+| `steps` | | Optional. The knob clicks between this many positions instead of sweeping. |
+| `printedLabels` | | Optional, with `steps`: one label per position, printed around a generated panel's knob. |
 
 The knob turns to `minDegree + n × (maxDegree − minDegree)`, where `n` is the value for unipolar knobs and `(value + 1) / 2` for bipolar ones.
 
-**Patch value:** a number from 0 to 1, or −1 to 1 for bipolar knobs. Default 0.
+**Patch value:** a number from 0 to 1, or −1 to 1 for bipolar knobs. Default 0. A stepped knob's positions are evenly spaced over that range: with `steps` 8, they're 0, 1/7, 2/7, … 1.
 
 ### From a patch sheet
 
@@ -213,6 +229,8 @@ A two- or three-position switch.
 
 `positions` is 2 or 3. `positionNames` are the panel's labels, in the same order as `graphics` (left to right, or top to bottom). A click flips a two-position toggle; a three-position toggle steps first → middle → last → middle.
 
+`printedLabels` (optional) is the short text a generated panel prints at each position (`["SAW", "TRI", "SQR"]`). It defaults to `positionNames`. Patches still store the `positionNames` value.
+
 **Patch value:** one of the `positionNames`. Default the first.
 
 ## rotary-switch
@@ -234,7 +252,7 @@ A stepped selector.
 }
 ```
 
-Each position has its own pre-rotated graphic, named by its angle. `positionNames` go counterclockwise first, matching `graphics`. `switchMode` is `reciprocating` (1 → 2 → 3 → 4 → 3 → 2, like a real stepped switch) or `continuous` (1 → 2 → 3 → 4 → 1).
+Each position has its own pre-rotated graphic, named by its angle. `positionNames` go counterclockwise first, matching `graphics`. `switchMode` is `reciprocating` (1 → 2 → 3 → 4 → 3 → 2, like a real stepped switch) or `continuous` (1 → 2 → 3 → 4 → 1). As for toggles, `printedLabels` sets the text a generated panel prints around the switch.
 
 **Patch value:** one of the `positionNames`. Default the first.
 
@@ -252,6 +270,8 @@ Each position has its own pre-rotated graphic, named by its angle. `positionName
 ```
 
 `graphics` is `[inactive, active]`. `buttonType` is `latching` (click to toggle) or `momentary` (pressed only while held).
+
+A button with a `note` (a MIDI note number) is a key, for synths whose keys are buttons: pressing it plays the note through the synth's [engine](engine.md#notes), and patches don't store it.
 
 **Patch value:** `true` for pressed. Default `false`.
 
@@ -273,6 +293,8 @@ One keyboard key. Each key is its own control.
 ```
 
 `keyType` is `natural` or `accidental`. Accidentals are drawn on top of naturals. A natural key's outline depends on its note: C and F are `cut-right`; D, G and A `cut-both`; E and B `cut-left`; a top C is `full`. `behaviorType` is `latching` (so a patch can show held notes) or `momentary`. Keys are named by note and octave, counting octaves from 0: `C0`, `C#0`, `D0`.
+
+`note` (optional) is the MIDI note the key plays through the synth's [engine](engine.md#notes) (60 is middle C). Without it, a key plays the note its name spells, with `C0` as MIDI 48. A generated keybed also uses `note` to place each accidental.
 
 **Patch value:** `true` for held. Default `false`.
 
@@ -330,3 +352,34 @@ Older packages use `size` in place of `width`/`height`, or a single `graphic` wi
 `type` repeats the control type: `input` or `output`. MIDI and USB ports are jacks too: MIDI In is an input; MIDI Out/Thru and USB are outputs.
 
 Jacks have no value. A patch connects them with [cables](patches.md#cables), from an output to an input.
+
+## code
+
+A screen holding code, for synths whose sound is partly written by the player. It's bound to a [`code` engine block](engine.md#code), which says what the code can do.
+
+```json
+"code": {
+  "name": "Code",
+  "type": "code",
+  "config": { "language": "javascript", "default": "return a;" }
+}
+```
+
+| Field | | |
+| --- | --- | --- |
+| `language` | | `javascript`, the only one so far. |
+| `default` | | The code a new patch starts with. |
+
+On a panel it shows the first lines of the code, or its error, on a small screen; tapping it opens an editor.
+
+**Patch value:** the code, as a string, in the `code` group. Default `""`, or the config's `default`.
+
+## graphic
+
+Artwork with no value, like the Speaker module's grill. It sits in a generated panel's rows like a control, but patches never set it, the engine never reads it, and nothing is printed for it.
+
+```json
+"speaker-grill": { "name": "Speaker Grill", "type": "graphic", "config": { "graphic": "parts:speaker-grill:round" } }
+```
+
+**Patch value:** none.

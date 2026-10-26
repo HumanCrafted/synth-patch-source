@@ -1,0 +1,146 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-quantizer",
+  "name": "Synth Patch Quantizer",
+  "manufacturer": "Synth Patch",
+  "model": "Quantizer",
+  "description": "Quantizer module: snaps pitch (V/Oct) to the nearest note of a scale, in any key",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Scale",
+            "Root"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Quantizer Input",
+            "Quantizer Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "scale": {
+      "name": "Scale",
+      "type": "rotary-switch",
+      "config": {
+        "graphics": "parts:rotary-switch-pointer-6pos",
+        "positions": 6,
+        "positionNames": [
+          "Chromatic",
+          "Major",
+          "Minor",
+          "Major Pentatonic",
+          "Minor Pentatonic",
+          "Blues"
+        ],
+        "printedLabels": [
+          "CHROM",
+          "MAJ",
+          "MIN",
+          "MAJ PENT",
+          "MIN PENT",
+          "BLUES"
+        ],
+        "switchMode": "reciprocating"
+      }
+    },
+    "root": {
+      "name": "Root",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -120,
+        "maxDegree": 120,
+        "sensitivity": 0.005,
+        "default": 0,
+        "steps": 12,
+        "printedLabels": [
+          "C",
+          "C#",
+          "D",
+          "D#",
+          "E",
+          "F",
+          "F#",
+          "G",
+          "G#",
+          "A",
+          "A#",
+          "B"
+        ]
+      }
+    },
+    "quantizer-input": {
+      "name": "Quantizer Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "quantizer-output": {
+      "name": "Quantizer Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "quantizer",
+        "type": "quantizer",
+        "params": {
+          "scale": {
+            "control": "Scale",
+            "steps": {
+              "Chromatic": 0,
+              "Major": 1,
+              "Minor": 2,
+              "Major Pentatonic": 3,
+              "Minor Pentatonic": 4,
+              "Blues": 5
+            }
+          },
+          "root": {
+            "control": "Root",
+            "range": [
+              0,
+              11
+            ]
+          }
+        },
+        "inputs": {
+          "in": {
+            "jack": "Quantizer Input"
+          }
+        },
+        "outputs": {
+          "out": "Quantizer Output"
+        }
+      }
+    ]
+  }
+}
