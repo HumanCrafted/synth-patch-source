@@ -32,9 +32,18 @@ The placement SVG is the frame plus a 15 px magenta (#FF00FF) dot at each contro
 
 The keys follow the placement dots' order: top to bottom, and left to right for dots less than 10 px apart vertically. The bottom jacks (y 710) sit exactly 10 px above the bottom row of controls (y 720), so they count as their own row and are numbered first.
 
+## Sound
+
+Demo One has an [engine](../../../../docs/engine.md), so it plays: from the computer keyboard or MIDI on its own, or cabled into a [rig](../../../rigs/demo-one-echo.json).
+
+- A `keyboard` block plays a `vco` (Range, Pitch, Wave and Pulse Width) into a `ladder` filter (Cutoff, Resonance, Envelope Amount; it tracks the keyboard) and a `vca`.
+- A `decay-env` opens both the filter and the VCA. Its trigger is the keyboard, or with **Hold** on, the keyboard or the clock (a `gate-or`). **Tempo** is an encoder: 120 BPM plus 40 per turn, 30 to 300.
+- The jacks break in where the panel has them: Gate Input replaces the envelope's trigger, Pitch CV Input and Cutoff CV Input add to the pitch and cutoff, and the outputs carry the oscillator, envelope and VCA.
+- The **Clock Indicator** LED follows the clock. The VCA goes to the speakers until Main Output is cabled.
+
 ## How it was built
 
-Drawn in the Synth Patch Figma file, in the "Demo One" section, the same way as the synths in the app:
+Drawn in Figma, in the "Demo One" section of what is now the [Figma template](../../../../docs/figma-template.md), the same way as the synths in the app:
 
 - **Components** are copies of house parts: the Grandmother-style knobs (212 and 91 px), jack, toggle, rotary switch, fader cap and LED, and the Mother-32 grey button. Each set has its state variants plus `placement` (a 15 px #FF00FF dot at the center) and `empty`.
 - **The panel** is a component, `demo1-thumbnail-2268w`, with every control at its default variant. Instances of it with every control on `empty` and on `placement` give the frame and placement SVGs.

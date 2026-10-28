@@ -1,0 +1,95 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-glide",
+  "name": "Synth Patch Glide",
+  "manufacturer": "Synth Patch",
+  "model": "Glide",
+  "description": "Glide (slew) module: smooths jumps in pitch or any CV over a set time",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Time"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Glide Input",
+            "Glide Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "time": {
+      "name": "Time",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.6
+      }
+    },
+    "glide-input": {
+      "name": "Glide Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "glide-output": {
+      "name": "Glide Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "glide",
+        "type": "slew",
+        "params": {
+          "time": {
+            "control": "Time",
+            "range": [
+              0.0005,
+              2
+            ],
+            "curve": "exp"
+          }
+        },
+        "inputs": {
+          "in": {
+            "jack": "Glide Input"
+          }
+        },
+        "outputs": {
+          "out": "Glide Output"
+        }
+      }
+    ]
+  }
+}

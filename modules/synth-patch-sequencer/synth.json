@@ -1,0 +1,600 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-sequencer",
+  "name": "Synth Patch Sequencer",
+  "manufacturer": "Synth Patch",
+  "model": "Sequencer",
+  "description": "Sequencer module of up to eight steps with a pitch knob, gate button and light per step, length and gate length, its own clock, and clock, reset and run inputs",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Tempo",
+            "Length",
+            "Gate Length"
+          ],
+          [
+            "Step 1",
+            "Step 2",
+            "Step 3",
+            "Step 4",
+            "Step 5",
+            "Step 6",
+            "Step 7",
+            "Step 8"
+          ],
+          [
+            "Gate 1",
+            "Gate 2",
+            "Gate 3",
+            "Gate 4",
+            "Gate 5",
+            "Gate 6",
+            "Gate 7",
+            "Gate 8"
+          ],
+          [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Clock Input",
+            "Reset Input",
+            "Run Input",
+            "Pitch Output",
+            "Gate Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "tempo": {
+      "name": "Tempo",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.357
+      }
+    },
+    "length": {
+      "name": "Length",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-large",
+        "minDegree": -120,
+        "maxDegree": 120,
+        "sensitivity": 0.005,
+        "default": 1,
+        "steps": 8,
+        "printedLabels": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8"
+        ]
+      }
+    },
+    "gate-length": {
+      "name": "Gate Length",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.4737
+      }
+    },
+    "step-1": {
+      "name": "Step 1",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0
+      }
+    },
+    "step-2": {
+      "name": "Step 2",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0
+      }
+    },
+    "step-3": {
+      "name": "Step 3",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0
+      }
+    },
+    "step-4": {
+      "name": "Step 4",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0
+      }
+    },
+    "step-5": {
+      "name": "Step 5",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0
+      }
+    },
+    "step-6": {
+      "name": "Step 6",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0
+      }
+    },
+    "step-7": {
+      "name": "Step 7",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0
+      }
+    },
+    "step-8": {
+      "name": "Step 8",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0
+      }
+    },
+    "gate-1": {
+      "name": "Gate 1",
+      "type": "button",
+      "config": {
+        "graphics": "parts:button-square",
+        "buttonType": "latching",
+        "default": true
+      }
+    },
+    "gate-2": {
+      "name": "Gate 2",
+      "type": "button",
+      "config": {
+        "graphics": "parts:button-square",
+        "buttonType": "latching",
+        "default": true
+      }
+    },
+    "gate-3": {
+      "name": "Gate 3",
+      "type": "button",
+      "config": {
+        "graphics": "parts:button-square",
+        "buttonType": "latching",
+        "default": true
+      }
+    },
+    "gate-4": {
+      "name": "Gate 4",
+      "type": "button",
+      "config": {
+        "graphics": "parts:button-square",
+        "buttonType": "latching",
+        "default": true
+      }
+    },
+    "gate-5": {
+      "name": "Gate 5",
+      "type": "button",
+      "config": {
+        "graphics": "parts:button-square",
+        "buttonType": "latching",
+        "default": true
+      }
+    },
+    "gate-6": {
+      "name": "Gate 6",
+      "type": "button",
+      "config": {
+        "graphics": "parts:button-square",
+        "buttonType": "latching",
+        "default": true
+      }
+    },
+    "gate-7": {
+      "name": "Gate 7",
+      "type": "button",
+      "config": {
+        "graphics": "parts:button-square",
+        "buttonType": "latching",
+        "default": true
+      }
+    },
+    "gate-8": {
+      "name": "Gate 8",
+      "type": "button",
+      "config": {
+        "graphics": "parts:button-square",
+        "buttonType": "latching",
+        "default": true
+      }
+    },
+    "light-1": {
+      "name": "1",
+      "type": "led",
+      "config": {
+        "graphics": "parts:led-round",
+        "numStates": 2,
+        "positionNames": [
+          "Off",
+          "On"
+        ],
+        "ledMode": "continuous"
+      }
+    },
+    "light-2": {
+      "name": "2",
+      "type": "led",
+      "config": {
+        "graphics": "parts:led-round",
+        "numStates": 2,
+        "positionNames": [
+          "Off",
+          "On"
+        ],
+        "ledMode": "continuous"
+      }
+    },
+    "light-3": {
+      "name": "3",
+      "type": "led",
+      "config": {
+        "graphics": "parts:led-round",
+        "numStates": 2,
+        "positionNames": [
+          "Off",
+          "On"
+        ],
+        "ledMode": "continuous"
+      }
+    },
+    "light-4": {
+      "name": "4",
+      "type": "led",
+      "config": {
+        "graphics": "parts:led-round",
+        "numStates": 2,
+        "positionNames": [
+          "Off",
+          "On"
+        ],
+        "ledMode": "continuous"
+      }
+    },
+    "light-5": {
+      "name": "5",
+      "type": "led",
+      "config": {
+        "graphics": "parts:led-round",
+        "numStates": 2,
+        "positionNames": [
+          "Off",
+          "On"
+        ],
+        "ledMode": "continuous"
+      }
+    },
+    "light-6": {
+      "name": "6",
+      "type": "led",
+      "config": {
+        "graphics": "parts:led-round",
+        "numStates": 2,
+        "positionNames": [
+          "Off",
+          "On"
+        ],
+        "ledMode": "continuous"
+      }
+    },
+    "light-7": {
+      "name": "7",
+      "type": "led",
+      "config": {
+        "graphics": "parts:led-round",
+        "numStates": 2,
+        "positionNames": [
+          "Off",
+          "On"
+        ],
+        "ledMode": "continuous"
+      }
+    },
+    "light-8": {
+      "name": "8",
+      "type": "led",
+      "config": {
+        "graphics": "parts:led-round",
+        "numStates": 2,
+        "positionNames": [
+          "Off",
+          "On"
+        ],
+        "ledMode": "continuous"
+      }
+    },
+    "clock-input": {
+      "name": "Clock Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "reset-input": {
+      "name": "Reset Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "run-input": {
+      "name": "Run Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "pitch-output": {
+      "name": "Pitch Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "gate-output": {
+      "name": "Gate Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "clock",
+        "type": "clock",
+        "params": {
+          "bpm": {
+            "control": "Tempo",
+            "range": [
+              20,
+              300
+            ]
+          }
+        }
+      },
+      {
+        "id": "seq",
+        "type": "sequencer",
+        "params": {
+          "step1": {
+            "control": "Step 1",
+            "range": [
+              0,
+              24
+            ]
+          },
+          "step2": {
+            "control": "Step 2",
+            "range": [
+              0,
+              24
+            ]
+          },
+          "step3": {
+            "control": "Step 3",
+            "range": [
+              0,
+              24
+            ]
+          },
+          "step4": {
+            "control": "Step 4",
+            "range": [
+              0,
+              24
+            ]
+          },
+          "step5": {
+            "control": "Step 5",
+            "range": [
+              0,
+              24
+            ]
+          },
+          "step6": {
+            "control": "Step 6",
+            "range": [
+              0,
+              24
+            ]
+          },
+          "step7": {
+            "control": "Step 7",
+            "range": [
+              0,
+              24
+            ]
+          },
+          "step8": {
+            "control": "Step 8",
+            "range": [
+              0,
+              24
+            ]
+          },
+          "gate1": {
+            "control": "Gate 1"
+          },
+          "gate2": {
+            "control": "Gate 2"
+          },
+          "gate3": {
+            "control": "Gate 3"
+          },
+          "gate4": {
+            "control": "Gate 4"
+          },
+          "gate5": {
+            "control": "Gate 5"
+          },
+          "gate6": {
+            "control": "Gate 6"
+          },
+          "gate7": {
+            "control": "Gate 7"
+          },
+          "gate8": {
+            "control": "Gate 8"
+          },
+          "length": {
+            "control": "Length",
+            "range": [
+              1,
+              8
+            ]
+          },
+          "gateLength": {
+            "control": "Gate Length",
+            "range": [
+              5,
+              100
+            ]
+          }
+        },
+        "inputs": {
+          "clock": {
+            "jack": "Clock Input",
+            "normal": "clock.out"
+          },
+          "reset": {
+            "jack": "Reset Input"
+          },
+          "run": {
+            "jack": "Run Input"
+          }
+        },
+        "outputs": {
+          "pitch": "Pitch Output",
+          "gate": "Gate Output"
+        }
+      }
+    ],
+    "leds": {
+      "1": {
+        "source": "seq.s1",
+        "on": "On",
+        "off": "Off"
+      },
+      "2": {
+        "source": "seq.s2",
+        "on": "On",
+        "off": "Off"
+      },
+      "3": {
+        "source": "seq.s3",
+        "on": "On",
+        "off": "Off"
+      },
+      "4": {
+        "source": "seq.s4",
+        "on": "On",
+        "off": "Off"
+      },
+      "5": {
+        "source": "seq.s5",
+        "on": "On",
+        "off": "Off"
+      },
+      "6": {
+        "source": "seq.s6",
+        "on": "On",
+        "off": "Off"
+      },
+      "7": {
+        "source": "seq.s7",
+        "on": "On",
+        "off": "Off"
+      },
+      "8": {
+        "source": "seq.s8",
+        "on": "On",
+        "off": "Off"
+      }
+    }
+  }
+}

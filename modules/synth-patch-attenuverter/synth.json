@@ -1,0 +1,191 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-attenuverter",
+  "name": "Synth Patch Attenuverter",
+  "manufacturer": "Synth Patch",
+  "model": "Attenuverter",
+  "description": "Attenuverter module: two channels that scale, invert and offset a signal; with nothing patched in, a channel puts out its offset",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Amount A",
+            "Offset A"
+          ],
+          [
+            "A Input",
+            "A Output"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Amount B",
+            "Offset B"
+          ],
+          [
+            "B Input",
+            "B Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "amount-a": {
+      "name": "Amount A",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "valueRange": "bipolar",
+        "default": 1
+      }
+    },
+    "offset-a": {
+      "name": "Offset A",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "valueRange": "bipolar",
+        "default": 0
+      }
+    },
+    "a-input": {
+      "name": "A Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "a-output": {
+      "name": "A Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "amount-b": {
+      "name": "Amount B",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "valueRange": "bipolar",
+        "default": 1
+      }
+    },
+    "offset-b": {
+      "name": "Offset B",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "valueRange": "bipolar",
+        "default": 0
+      }
+    },
+    "b-input": {
+      "name": "B Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "b-output": {
+      "name": "B Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "a",
+        "type": "attenuverter",
+        "params": {
+          "amount": {
+            "control": "Amount A",
+            "range": [
+              -1,
+              1
+            ]
+          },
+          "offset": {
+            "control": "Offset A",
+            "range": [
+              -1,
+              1
+            ]
+          }
+        },
+        "inputs": {
+          "in": {
+            "jack": "A Input"
+          }
+        },
+        "outputs": {
+          "out": "A Output"
+        }
+      },
+      {
+        "id": "b",
+        "type": "attenuverter",
+        "params": {
+          "amount": {
+            "control": "Amount B",
+            "range": [
+              -1,
+              1
+            ]
+          },
+          "offset": {
+            "control": "Offset B",
+            "range": [
+              -1,
+              1
+            ]
+          }
+        },
+        "inputs": {
+          "in": {
+            "jack": "B Input"
+          }
+        },
+        "outputs": {
+          "out": "B Output"
+        }
+      }
+    ]
+  }
+}

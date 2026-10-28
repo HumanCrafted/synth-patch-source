@@ -1,39 +1,56 @@
 # Synth Patch Source
 
-Open documentation for the file formats behind [Synth Patch](https://synthpatch.io): how a hardware synth is described as panel art plus a list of controls, and how a patch for that synth is written down. The synths in the app, and their patches, are kept separately. 
+Open documentation for the file formats behind [Synth Patch](https://synthpatch.io): how a synth is described as a panel and a list of controls, how it sounds, and how a patch for one synth, or a rig of several cabled together, is written down. The synths in the app, and their patches, are kept separately.
 
 ![Demo One, the example synth](examples/synths/example-instruments/demo-one/assets/demo1-thumbnail-2268w.png)
 
 ## Formats
 
-Two formats (so far). Both are plain JSON and SVG.
+Version 2.0. Both formats are plain JSON (and SVG).
 
-- **`synthjson/1`, a synth package.** A folder with `synth.json`, the panel art, and one SVG per control state. See [Synth package](docs/synth-package.md) and [Controls](docs/controls.md).
-- **`patchjson/1`, a patch.** One JSON file per patch, with knobs, switches and cables referenced by control name, so a patch can be written by hand from a patch sheet. A pack bundles many. See [Patches](docs/patches.md).
+- **`synthjson/2`, a synth package.** A synth is **drawn** (panel art plus one SVG per control state, for real hardware) or **generated** (rows of controls drawn from a shared parts library, only JSON). Either can have an **engine** that says how it sounds. See [Synth package](docs/synth-package.md), [Controls](docs/controls.md) and [Engine](docs/engine.md).
+- **`patchjson/2`, a patch.** A one-synth patch stores knobs, switches and cables by control name, so it can be written by hand from a patch sheet. A **rig** places several synths on a canvas and cables them together. See [Patches](docs/patches.md) and [Rigs](docs/rigs.md).
 
-The `format` field carries the version. A change that breaks existing files gets a new number.
+Every `synthjson/1` and `patchjson/1` file is valid in 2.0. The `format` field carries the version; a change that breaks existing files gets a new number. What changed is in the [changelog](CHANGELOG.md).
+
+## The standard library
+
+- **[Standard modules](docs/modules.md):** 18 generated synths for building rigs (oscillator, filter, envelope, VCA, sequencer, Code and more), each with an engine. In [`modules/`](modules).
+- **[Parts](docs/parts.md):** the generic control graphics generated synths are drawn from, `"parts:knob-moog-large"`. In [`parts/`](parts).
 
 ## Layout
 
 ```
 docs/
-  synth-package.md     synthjson/1: folder, synth.json, coordinates, assets
+  synth-package.md     synthjson/2: drawn and generated synths, parts, variants
   controls.md          every control type, its config and its patch value
-  patches.md           patchjson/1: patch files, cables, sources, packs
+  engine.md            how a synth sounds: blocks, bindings, signals
+  patches.md           one-synth patches: controls, cables, sources, packs
+  rigs.md              patchjson/2 rigs: instances and cables between them
+  modules.md           the standard modules, every control and jack
+  parts.md             the parts library
+  figma-template.md    the Figma Community template
+modules/synth-patch-*/synth.json                 the standard modules
+parts/                                           parts.json and the part SVGs
 examples/
-  synths/example-instruments/demo-one/          a complete synth package
-  patches/example-instruments/demo-one/         three patches for it
+  synths/example-instruments/demo-one/           a drawn synth with an engine
+  patches/example-instruments/demo-one/          three patches for it
   patches/packs/example-instruments-demo-one.json
+  rigs/                                          two rigs
 ```
 
 ## The example synth
 
-Demo One by Example Instruments isn't a real instrument. It was drawn in the Synth Patch Figma file for these docs, with the same components and conventions as the synths in the app: 17 controls covering knobs, a rotary switch, a toggle, a fader, an encoder, an LED, a button, and a six-jack patch bay. Every file in its package is real output from that build, and its patches pass the same checks as the library's.
+Demo One by Example Instruments isn't a real instrument. It was drawn in Figma for these docs, with the same components and conventions as the synths in the app: 17 controls covering knobs, a rotary switch, a toggle, a fader, an encoder, an LED, a button, and a six-jack patch bay. Every file in its package is real output from that build, and its engine and patches pass the same checks as the app's.
 
-See [Demo One](examples/synths/example-instruments/demo-one/README.md) for its controls, placement dots, and how it was built.
+See [Demo One](examples/synths/example-instruments/demo-one/README.md) for its controls, placement dots, sound, and how it was built.
+
+## Figma template
+
+**[Synth Patch Source on Figma Community](https://www.figma.com/community/file/1696621078668432467)** is the file Demo One was built in: the panel, a component set for each control type, and the color styles. Duplicate it to see how a drawn synth is put together, or to draw your own. See [Figma template](docs/figma-template.md).
 
 ## License
 
-The docs, the format specs and the examples (JSON, SVG and PNG files) are licensed under [CC BY 4.0](LICENSE). Use them, adapt them, build on them, including commercially; credit Synth Patch by Human Crafted LLC. The code (`examples/synths/example-instruments/demo-one/source/build_synth_json.py`) is under the [MIT License](LICENSE-CODE).
+The docs, the format specs, the examples, the modules and the parts (JSON, SVG and PNG files) are licensed under [CC BY 4.0](LICENSE). Use them, adapt them, build on them, including commercially; credit Synth Patch by Human Crafted LLC. The code (`examples/synths/example-instruments/demo-one/source/build_synth_json.py`) is under the [MIT License](LICENSE-CODE).
 
 Neither license covers the Synth Patch name or logo.
