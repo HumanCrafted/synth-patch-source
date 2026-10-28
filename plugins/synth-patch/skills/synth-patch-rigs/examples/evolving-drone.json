@@ -1,0 +1,56 @@
+{
+  "format": "patchjson/2",
+  "name": "Evolving Drone",
+  "description": "Two saws a fifth apart, held open by a VCA, with a filter that opens and closes over 100 seconds from a slow LFO variant.",
+  "tags": ["drone", "ambient"],
+  "instances": [
+    {
+      "id": "root",
+      "synth": "synth-patch-oscillator",
+      "x": 0,
+      "y": 0,
+      "controls": { "rotarySwitches": { "Octave": "16'" } }
+    },
+    {
+      "id": "fifth",
+      "synth": "synth-patch-oscillator",
+      "x": 1360,
+      "y": 0,
+      "controls": { "rotarySwitches": { "Octave": "16'" }, "knobs": { "Tune": 0.5833, "Fine": 0.14 } }
+    },
+    { "id": "mix", "synth": "synth-patch-mixer", "x": 2720, "y": 0, "controls": { "knobs": { "Level B": 0.7 } } },
+    {
+      "id": "slow",
+      "synth": "custom-slow-lfo",
+      "x": 4120,
+      "y": 0,
+      "controls": { "knobs": { "Rate": 0.233 }, "rotarySwitches": { "Shape": "Triangle" } }
+    },
+    {
+      "id": "vcf",
+      "synth": "synth-patch-filter",
+      "x": 5188,
+      "y": 0,
+      "controls": { "knobs": { "Cutoff": 0.3181, "Resonance": 0.5, "Envelope Amount": 0.6667 } }
+    },
+    { "id": "vca", "synth": "synth-patch-vca", "x": 0, "y": 1359, "controls": { "knobs": { "Initial Level": 0.6 } } },
+    {
+      "id": "plate",
+      "synth": "synth-patch-reverb",
+      "x": 1016,
+      "y": 1359,
+      "controls": { "knobs": { "Size": 0.8, "Mix": 0.35 } }
+    },
+    { "id": "out", "synth": "synth-patch-speaker", "x": 2124, "y": 1359 }
+  ],
+  "cables": [
+    { "from": "root/Saw Output", "to": "mix/Input A", "color": "Signal Orange" },
+    { "from": "fifth/Saw Output", "to": "mix/Input B", "color": "Signal Orange" },
+    { "from": "mix/Mixer Output", "to": "vcf/Filter Input", "color": "Signal Orange" },
+    { "from": "slow/Unipolar Output", "to": "vcf/Envelope Input", "color": "Control Blue" },
+    { "from": "vcf/LP Output", "to": "vca/VCA Input", "color": "Signal Orange" },
+    { "from": "vca/VCA Output", "to": "plate/Reverb Input", "color": "Signal Orange" },
+    { "from": "plate/Reverb Output", "to": "out/Speaker Input", "color": "Signal Orange" }
+  ],
+  "notes": "Needs the **Custom Slow LFO** variant: add it first with Add module → Paste synth JSON (`slow-lfo.synth.json`). Its Unipolar Output (0 to 1) goes into the filter's Envelope Input, so **Envelope Amount** sets how far the sweep opens the filter above **Cutoff**. The VCA's **Initial Level** holds it open with nothing in its CV, so it drones until you stop it."
+}

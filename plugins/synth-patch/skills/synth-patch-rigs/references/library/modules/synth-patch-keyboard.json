@@ -1,0 +1,257 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-keyboard",
+  "name": "Synth Patch Keyboard",
+  "manufacturer": "Synth Patch",
+  "model": "Keyboard",
+  "description": "Keyboard module with one octave of keys, an octave switch and pitch and gate outputs",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Octave",
+            "Gate",
+            "Pitch Output",
+            "Gate Output"
+          ],
+          [
+            "C3",
+            "C#3",
+            "D3",
+            "D#3",
+            "E3",
+            "F3",
+            "F#3",
+            "G3",
+            "G#3",
+            "A3",
+            "A#3",
+            "B3",
+            "C4"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "octave": {
+      "name": "Octave",
+      "type": "rotary-switch",
+      "config": {
+        "graphics": "parts:rotary-switch-pointer-4pos",
+        "positions": 4,
+        "positionNames": [
+          "C2",
+          "C3",
+          "C4",
+          "C5"
+        ],
+        "switchMode": "reciprocating",
+        "default": "C3"
+      }
+    },
+    "gate": {
+      "name": "Gate",
+      "type": "led",
+      "config": {
+        "graphics": "parts:led-round",
+        "numStates": 2,
+        "positionNames": [
+          "Off",
+          "On"
+        ],
+        "ledMode": "continuous"
+      }
+    },
+    "key-0": {
+      "name": "C3",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-natural-cut-right",
+        "keyType": "natural",
+        "behaviorType": "momentary",
+        "note": 48
+      }
+    },
+    "key-1": {
+      "name": "C#3",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-accidental",
+        "keyType": "accidental",
+        "behaviorType": "momentary",
+        "note": 49
+      }
+    },
+    "key-2": {
+      "name": "D3",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-natural-cut-both",
+        "keyType": "natural",
+        "behaviorType": "momentary",
+        "note": 50
+      }
+    },
+    "key-3": {
+      "name": "D#3",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-accidental",
+        "keyType": "accidental",
+        "behaviorType": "momentary",
+        "note": 51
+      }
+    },
+    "key-4": {
+      "name": "E3",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-natural-cut-left",
+        "keyType": "natural",
+        "behaviorType": "momentary",
+        "note": 52
+      }
+    },
+    "key-5": {
+      "name": "F3",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-natural-cut-right",
+        "keyType": "natural",
+        "behaviorType": "momentary",
+        "note": 53
+      }
+    },
+    "key-6": {
+      "name": "F#3",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-accidental",
+        "keyType": "accidental",
+        "behaviorType": "momentary",
+        "note": 54
+      }
+    },
+    "key-7": {
+      "name": "G3",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-natural-cut-both",
+        "keyType": "natural",
+        "behaviorType": "momentary",
+        "note": 55
+      }
+    },
+    "key-8": {
+      "name": "G#3",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-accidental",
+        "keyType": "accidental",
+        "behaviorType": "momentary",
+        "note": 56
+      }
+    },
+    "key-9": {
+      "name": "A3",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-natural-cut-both",
+        "keyType": "natural",
+        "behaviorType": "momentary",
+        "note": 57
+      }
+    },
+    "key-10": {
+      "name": "A#3",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-accidental",
+        "keyType": "accidental",
+        "behaviorType": "momentary",
+        "note": 58
+      }
+    },
+    "key-11": {
+      "name": "B3",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-natural-cut-left",
+        "keyType": "natural",
+        "behaviorType": "momentary",
+        "note": 59
+      }
+    },
+    "key-12": {
+      "name": "C4",
+      "type": "key",
+      "config": {
+        "graphics": "parts:key-natural-full",
+        "keyType": "natural",
+        "behaviorType": "momentary",
+        "note": 60
+      }
+    },
+    "pitch-output": {
+      "name": "Pitch Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "gate-output": {
+      "name": "Gate Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "keys",
+        "type": "keyboard",
+        "params": {
+          "transpose": {
+            "control": "Octave",
+            "steps": {
+              "C2": -1,
+              "C3": 0,
+              "C4": 1,
+              "C5": 2
+            }
+          }
+        },
+        "outputs": {
+          "pitch": "Pitch Output",
+          "gate": "Gate Output"
+        }
+      }
+    ],
+    "leds": {
+      "Gate": {
+        "source": "keys.gate",
+        "on": "On",
+        "off": "Off"
+      }
+    }
+  }
+}

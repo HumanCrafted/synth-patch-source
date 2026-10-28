@@ -37,6 +37,7 @@ examples/
   patches/example-instruments/demo-one/          three patches for it
   patches/packs/example-instruments-demo-one.json
   rigs/                                          two rigs
+plugins/synth-patch/skills/synth-patch-rigs/     the rig-writing skill (below)
 ```
 
 ## The example synth
@@ -45,12 +46,25 @@ Demo One by Example Instruments isn't a real instrument. It was drawn in Figma f
 
 See [Demo One](examples/synths/example-instruments/demo-one/README.md) for its controls, placement dots, sound, and how it was built.
 
+## Writing rigs with an assistant
+
+[`synth-patch-rigs`](plugins/synth-patch/skills/synth-patch-rigs/SKILL.md) is a skill that teaches a coding assistant to write rigs from a description ("an acid bassline that plays itself", "a lead I can play from the keyboard"), and module variants when a rig needs one. It carries the module names, values and docs from this repo, worked examples, and `rig.py`, which checks a rig the way the app reads it, explains its values in Hz and seconds, converts units to patch values and lays out the canvas.
+
+In Claude Code, add this repo as a plugin marketplace and install it:
+
+```
+/plugin marketplace add HumanCrafted/synth-patch-source
+/plugin install synth-patch@synth-patch-source
+```
+
+Any tool that reads Agent Skills can use the folder as it is: copy `plugins/synth-patch/skills/synth-patch-rigs` into its skills folder.
+
 ## Figma template
 
 **[Synth Patch Source on Figma Community](https://www.figma.com/community/file/1696621078668432467)** is the file Demo One was built in: the panel, a component set for each control type, and the color styles. Duplicate it to see how a drawn synth is put together, or to draw your own. See [Figma template](docs/figma-template.md).
 
 ## License
 
-The docs, the format specs, the examples, the modules and the parts (JSON, SVG and PNG files) are licensed under [CC BY 4.0](LICENSE). Use them, adapt them, build on them, including commercially; credit Synth Patch by Human Crafted LLC. The code (`examples/synths/example-instruments/demo-one/source/build_synth_json.py`) is under the [MIT License](LICENSE-CODE).
+The docs, the format specs, the examples, the modules and the parts (JSON, SVG and PNG files) are licensed under [CC BY 4.0](LICENSE). Use them, adapt them, build on them, including commercially; credit Synth Patch by Human Crafted LLC. The code (`examples/synths/example-instruments/demo-one/source/build_synth_json.py` and the skill's `scripts/`) is under the [MIT License](LICENSE-CODE).
 
 Neither license covers the Synth Patch name or logo.
