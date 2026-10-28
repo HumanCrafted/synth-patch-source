@@ -1,0 +1,67 @@
+{
+  "format": "patchjson/2",
+  "name": "Acid Line",
+  "description": "An eight-step acid bassline: a saw through a resonant ladder filter, plucked by a short envelope, with a dotted-eighth delay.",
+  "tags": ["bass", "acid", "sequence"],
+  "instances": [
+    {
+      "id": "seq",
+      "synth": "synth-patch-sequencer",
+      "x": 0,
+      "y": 0,
+      "controls": {
+        "knobs": {
+          "Tempo": 0.8429,
+          "Gate Length": 0.3158,
+          "Step 3": 0.5,
+          "Step 5": 0.125,
+          "Step 6": 0.625,
+          "Step 8": 0.4167
+        },
+        "buttons": { "Gate 2": false, "Gate 7": false }
+      }
+    },
+    {
+      "id": "osc",
+      "synth": "synth-patch-oscillator",
+      "x": 1832,
+      "y": 0,
+      "controls": { "rotarySwitches": { "Octave": "16'" } }
+    },
+    {
+      "id": "env",
+      "synth": "synth-patch-envelope",
+      "x": 3192,
+      "y": 0,
+      "controls": { "knobs": { "Attack": 0.0814, "Decay": 0.5188, "Sustain": 0, "Release": 0.3758 } }
+    },
+    {
+      "id": "vcf",
+      "synth": "synth-patch-filter",
+      "x": 4592,
+      "y": 0,
+      "controls": { "knobs": { "Cutoff": 0.3713, "Resonance": 0.8095, "Envelope Amount": 0.6667 } }
+    },
+    { "id": "vca", "synth": "synth-patch-vca", "x": 0, "y": 1629 },
+    {
+      "id": "echo",
+      "synth": "synth-patch-delay",
+      "x": 1016,
+      "y": 1629,
+      "controls": { "knobs": { "Time": 0.6719, "Feedback": 0.3684, "Mix": 0.25 } }
+    },
+    { "id": "out", "synth": "synth-patch-speaker", "x": 2124, "y": 1629 }
+  ],
+  "cables": [
+    { "from": "seq/Pitch Output", "to": "osc/V/Oct Input" },
+    { "from": "seq/Pitch Output", "to": "vcf/V/Oct Input" },
+    { "from": "seq/Gate Output", "to": "env/Gate Input" },
+    { "from": "osc/Saw Output", "to": "vcf/Filter Input", "color": "Signal Orange" },
+    { "from": "env/Envelope Output", "to": "vcf/Envelope Input", "color": "Control Blue" },
+    { "from": "env/Envelope Output", "to": "vca/CV Input", "color": "Control Blue" },
+    { "from": "vcf/LP Output", "to": "vca/VCA Input", "color": "Signal Orange" },
+    { "from": "vca/VCA Output", "to": "echo/Delay Input", "color": "Signal Orange" },
+    { "from": "echo/Delay Output", "to": "out/Speaker Input", "color": "Signal Orange" }
+  ],
+  "notes": "The Sequencer steps once per beat of its own clock, so **Tempo** at 256 BPM plays eighth notes at 128. Steps 2 and 7 rest. Turn the filter's **Cutoff** and **Envelope Amount** while it runs; **Resonance** past about 0.95 starts to whistle."
+}

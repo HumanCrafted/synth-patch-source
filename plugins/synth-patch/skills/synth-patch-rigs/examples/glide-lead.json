@@ -1,0 +1,61 @@
+{
+  "format": "patchjson/2",
+  "name": "Glide Lead",
+  "description": "A saw lead played from the keyboard, with portamento, a light vibrato and an eighth-note echo.",
+  "tags": ["lead", "keyboard"],
+  "instances": [
+    {
+      "id": "keys",
+      "synth": "synth-patch-keyboard",
+      "x": 0,
+      "y": 0,
+      "controls": { "rotarySwitches": { "Octave": "C4" } }
+    },
+    { "id": "glide", "synth": "synth-patch-glide", "x": 2392, "y": 0, "controls": { "knobs": { "Time": 0.6119 } } },
+    { "id": "vibrato", "synth": "synth-patch-lfo", "x": 3103, "y": 0, "controls": { "knobs": { "Rate": 0.7032 } } },
+    {
+      "id": "osc",
+      "synth": "synth-patch-oscillator",
+      "x": 4171,
+      "y": 0,
+      "controls": { "knobs": { "FM Amount": 0.018 } }
+    },
+    {
+      "id": "env",
+      "synth": "synth-patch-envelope",
+      "x": 5531,
+      "y": 0,
+      "controls": { "knobs": { "Attack": 0.2703, "Decay": 0.6344, "Sustain": 0.7, "Release": 0.555 } }
+    },
+    {
+      "id": "vcf",
+      "synth": "synth-patch-filter",
+      "x": 0,
+      "y": 2320,
+      "controls": { "knobs": { "Cutoff": 0.6514, "Envelope Amount": 0.3333, "Key Track": 1 } }
+    },
+    { "id": "vca", "synth": "synth-patch-vca", "x": 1695, "y": 2320 },
+    {
+      "id": "echo",
+      "synth": "synth-patch-delay",
+      "x": 2711,
+      "y": 2320,
+      "controls": { "knobs": { "Time": 0.6541, "Mix": 0.25 } }
+    },
+    { "id": "out", "synth": "synth-patch-speaker", "x": 3819, "y": 2320 }
+  ],
+  "cables": [
+    { "from": "keys/Pitch Output", "to": "glide/Glide Input" },
+    { "from": "glide/Glide Output", "to": "osc/V/Oct Input" },
+    { "from": "glide/Glide Output", "to": "vcf/V/Oct Input" },
+    { "from": "keys/Gate Output", "to": "env/Gate Input" },
+    { "from": "vibrato/LFO Output", "to": "osc/FM Input", "color": "Control Blue" },
+    { "from": "osc/Saw Output", "to": "vcf/Filter Input", "color": "Signal Orange" },
+    { "from": "env/Envelope Output", "to": "vcf/Envelope Input", "color": "Control Blue" },
+    { "from": "env/Envelope Output", "to": "vca/CV Input", "color": "Control Blue" },
+    { "from": "vcf/LP Output", "to": "vca/VCA Input", "color": "Signal Orange" },
+    { "from": "vca/VCA Output", "to": "echo/Delay Input", "color": "Signal Orange" },
+    { "from": "echo/Delay Output", "to": "out/Speaker Input", "color": "Signal Orange" }
+  ],
+  "notes": "Play it from the on-screen keys or the computer keyboard. The Glide takes about 80 ms between notes; turn its **Time** up for slower slides. The LFO at 5.5 Hz moves the pitch about 20 cents either way; **FM Amount** on the oscillator sets the depth."
+}

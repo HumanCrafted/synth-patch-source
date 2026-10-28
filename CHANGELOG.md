@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **Rig-writing skill:** [`synth-patch-rigs`](plugins/synth-patch/skills/synth-patch-rigs/SKILL.md), installable as the `synth-patch` plugin from this repo's marketplace. Writes rigs and module variants from a description, with the module names and docs copied from this repo by `scripts/build_reference.py`, four worked examples, and `scripts/rig.py` to check, explain and lay out rigs. No format changes.
+
 ## 2.0.0 (2026-10-26)
 
 `synthjson/2` and `patchjson/2`. Every `synthjson/1` and `patchjson/1` file is still valid.

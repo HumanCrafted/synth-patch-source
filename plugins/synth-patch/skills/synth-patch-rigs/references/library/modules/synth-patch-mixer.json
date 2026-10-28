@@ -1,0 +1,187 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-mixer",
+  "name": "Synth Patch Mixer",
+  "manufacturer": "Synth Patch",
+  "model": "Mixer",
+  "description": "Four-input mixer module",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Level A",
+            "Level B",
+            "Level C",
+            "Level D"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Input A",
+            "Input B",
+            "Input C",
+            "Input D",
+            "Mixer Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "level-a": {
+      "name": "Level A",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 1
+      }
+    },
+    "level-b": {
+      "name": "Level B",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 1
+      }
+    },
+    "level-c": {
+      "name": "Level C",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 1
+      }
+    },
+    "level-d": {
+      "name": "Level D",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 1
+      }
+    },
+    "input-a": {
+      "name": "Input A",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "input-b": {
+      "name": "Input B",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "input-c": {
+      "name": "Input C",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "input-d": {
+      "name": "Input D",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "mixer-output": {
+      "name": "Mixer Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "mix",
+        "type": "mixer",
+        "params": {
+          "levelA": {
+            "control": "Level A",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "levelB": {
+            "control": "Level B",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "levelC": {
+            "control": "Level C",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "levelD": {
+            "control": "Level D",
+            "range": [
+              0,
+              1
+            ]
+          }
+        },
+        "inputs": {
+          "a": {
+            "jack": "Input A"
+          },
+          "b": {
+            "jack": "Input B"
+          },
+          "c": {
+            "jack": "Input C"
+          },
+          "d": {
+            "jack": "Input D"
+          }
+        },
+        "outputs": {
+          "out": "Mixer Output"
+        }
+      }
+    ]
+  }
+}
