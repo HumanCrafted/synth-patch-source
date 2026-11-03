@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 (2026-10-26)
+## 2.0.0 (2026-10-28)
 
 `synthjson/2` and `patchjson/2`. Every `synthjson/1` and `patchjson/1` file is still valid.
 
