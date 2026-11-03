@@ -1,0 +1,65 @@
+{
+  "format": "patchjson/2",
+  "name": "Pentatonic Drift",
+  "description": "Random notes in A minor pentatonic, gliding into each other through a slowly swept filter and a long plate reverb. Plays by itself.",
+  "tags": ["ambient", "generative", "pad"],
+  "instances": [
+    { "id": "clock", "synth": "synth-patch-clock", "x": 0, "y": 0, "controls": { "knobs": { "Tempo": 0.1 } } },
+    { "id": "random", "synth": "synth-patch-random", "x": 880, "y": 0 },
+    {
+      "id": "quant",
+      "synth": "synth-patch-quantizer",
+      "x": 2140,
+      "y": 0,
+      "controls": { "rotarySwitches": { "Scale": "Minor Pentatonic" }, "knobs": { "Root": 0.8182 } }
+    },
+    { "id": "glide", "synth": "synth-patch-glide", "x": 3233, "y": 0, "controls": { "knobs": { "Time": 0.6608 } } },
+    { "id": "osc", "synth": "synth-patch-oscillator", "x": 3944, "y": 0 },
+    {
+      "id": "sweep",
+      "synth": "synth-patch-lfo",
+      "x": 5304,
+      "y": 0,
+      "controls": { "knobs": { "Rate": 0.0503 }, "rotarySwitches": { "Shape": "Triangle" } }
+    },
+    {
+      "id": "vcf",
+      "synth": "synth-patch-filter",
+      "x": 0,
+      "y": 1359,
+      "controls": { "knobs": { "Cutoff": 0.615, "Envelope Amount": 0.25, "CV Amount": 0.375 } }
+    },
+    {
+      "id": "env",
+      "synth": "synth-patch-envelope",
+      "x": 1695,
+      "y": 1359,
+      "controls": { "knobs": { "Attack": 0.6878, "Decay": 0.7934, "Sustain": 0.5, "Release": 0.8423 } }
+    },
+    { "id": "vca", "synth": "synth-patch-vca", "x": 3095, "y": 1359 },
+    {
+      "id": "plate",
+      "synth": "synth-patch-reverb",
+      "x": 4111,
+      "y": 1359,
+      "controls": { "knobs": { "Size": 0.85, "Damping": 0.5, "Mix": 0.45 } }
+    },
+    { "id": "out", "synth": "synth-patch-speaker", "x": 5219, "y": 1359 }
+  ],
+  "cables": [
+    { "from": "clock/Clock Output", "to": "random/Clock Input", "color": "Patch Green" },
+    { "from": "clock/Clock Output", "to": "env/Gate Input", "color": "Patch Green" },
+    { "from": "random/Stepped Output", "to": "quant/Quantizer Input" },
+    { "from": "quant/Quantizer Output", "to": "glide/Glide Input" },
+    { "from": "glide/Glide Output", "to": "osc/V/Oct Input" },
+    { "from": "glide/Glide Output", "to": "vcf/V/Oct Input" },
+    { "from": "osc/Saw Output", "to": "vcf/Filter Input", "color": "Signal Orange" },
+    { "from": "sweep/LFO Output", "to": "vcf/Cutoff CV Input", "color": "Control Blue" },
+    { "from": "env/Envelope Output", "to": "vcf/Envelope Input", "color": "Control Blue" },
+    { "from": "env/Envelope Output", "to": "vca/CV Input", "color": "Control Blue" },
+    { "from": "vcf/LP Output", "to": "vca/VCA Input", "color": "Signal Orange" },
+    { "from": "vca/VCA Output", "to": "plate/Reverb Input", "color": "Signal Orange" },
+    { "from": "plate/Reverb Output", "to": "out/Speaker Input", "color": "Signal Orange" }
+  ],
+  "notes": "The Clock at 48 BPM picks a new random note and opens the envelope on every beat. Random's values span an octave either side of middle C, snapped to A minor pentatonic by the Quantizer. The LFO sweeps the filter over about 14 seconds. Change the **Scale** and **Root** on the Quantizer to change key."
+}

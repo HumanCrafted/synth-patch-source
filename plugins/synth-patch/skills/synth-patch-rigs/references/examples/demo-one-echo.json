@@ -1,0 +1,39 @@
+{
+  "format": "patchjson/2",
+  "name": "Demo One Echo",
+  "description": "Demo One with an LFO sweeping its filter, through a delay to the speaker.",
+  "tags": ["delay", "lfo"],
+  "instances": [
+    {
+      "id": "demo",
+      "synth": "example-instruments-demo-one",
+      "x": 0,
+      "y": 0,
+      "controls": {
+        "knobs": { "Filter Cutoff": 0.4, "Filter Resonance": 0.55 },
+        "toggles": { "Oscillator Wave": "Square" },
+        "sliders": { "Filter Envelope Decay": 0.35 }
+      }
+    },
+    {
+      "id": "lfo",
+      "synth": "synth-patch-lfo",
+      "x": 2390,
+      "y": 0,
+      "controls": { "knobs": { "Rate": 0.3 }, "rotarySwitches": { "Shape": "Triangle" } }
+    },
+    {
+      "id": "echo",
+      "synth": "synth-patch-delay",
+      "x": 3460,
+      "y": 0,
+      "controls": { "knobs": { "Time": 0.6, "Feedback": 0.5, "Mix": 0.4 } }
+    },
+    { "id": "out", "synth": "synth-patch-speaker", "x": 4570, "y": 0 }
+  ],
+  "cables": [
+    { "from": "lfo/LFO Output", "to": "demo/Cutoff CV Input", "color": "Control Blue" },
+    { "from": "demo/Main Output", "to": "echo/Delay Input", "color": "Signal Orange" },
+    { "from": "echo/Delay Output", "to": "out/Speaker Input", "color": "Signal Orange" }
+  ]
+}

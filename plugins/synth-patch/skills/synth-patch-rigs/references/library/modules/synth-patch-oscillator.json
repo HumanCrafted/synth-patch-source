@@ -1,0 +1,255 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-oscillator",
+  "name": "Synth Patch Oscillator",
+  "manufacturer": "Synth Patch",
+  "model": "Oscillator",
+  "description": "Oscillator module with separate saw, triangle and pulse outputs, an octave switch, coarse and fine tuning, pulse width, FM and PWM inputs with amount knobs, and hard sync",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Octave",
+            "Tune",
+            "Fine",
+            "Pulse Width"
+          ],
+          [
+            "FM Amount",
+            "PWM Amount"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "V/Oct Input",
+            "FM Input",
+            "PWM Input",
+            "Sync Input"
+          ],
+          [
+            "Saw Output",
+            "Triangle Output",
+            "Square Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "octave": {
+      "name": "Octave",
+      "type": "rotary-switch",
+      "config": {
+        "graphics": "parts:rotary-switch-pointer-4pos",
+        "positions": 4,
+        "positionNames": [
+          "32'",
+          "16'",
+          "8'",
+          "4'"
+        ],
+        "switchMode": "reciprocating",
+        "default": "8'"
+      }
+    },
+    "tune": {
+      "name": "Tune",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "valueRange": "bipolar"
+      }
+    },
+    "fine": {
+      "name": "Fine",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "valueRange": "bipolar"
+      }
+    },
+    "pulse-width": {
+      "name": "Pulse Width",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005
+      }
+    },
+    "fm-amount": {
+      "name": "FM Amount",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.1
+      }
+    },
+    "pwm-amount": {
+      "name": "PWM Amount",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.5
+      }
+    },
+    "v-oct-input": {
+      "name": "V/Oct Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "fm-input": {
+      "name": "FM Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "pwm-input": {
+      "name": "PWM Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "sync-input": {
+      "name": "Sync Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "saw-output": {
+      "name": "Saw Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "triangle-output": {
+      "name": "Triangle Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "square-output": {
+      "name": "Square Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "vco",
+        "type": "vco",
+        "params": {
+          "octave": {
+            "control": "Octave",
+            "steps": {
+              "32'": -2,
+              "16'": -1,
+              "8'": 0,
+              "4'": 1
+            }
+          },
+          "tune": {
+            "control": "Tune",
+            "range": [
+              -12,
+              12
+            ]
+          },
+          "pulseWidth": {
+            "control": "Pulse Width",
+            "range": [
+              0.5,
+              0.95
+            ]
+          },
+          "fmAmount": {
+            "control": "FM Amount",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "pwmAmount": {
+            "control": "PWM Amount",
+            "range": [
+              0,
+              0.45
+            ]
+          },
+          "fine": {
+            "control": "Fine",
+            "range": [
+              -0.5,
+              0.5
+            ]
+          }
+        },
+        "inputs": {
+          "pitch": {
+            "jack": "V/Oct Input"
+          },
+          "pitchCv": {
+            "jack": "FM Input"
+          },
+          "pwCv": {
+            "jack": "PWM Input"
+          },
+          "sync": {
+            "jack": "Sync Input"
+          }
+        },
+        "outputs": {
+          "saw": "Saw Output",
+          "triangle": "Triangle Output",
+          "square": "Square Output"
+        }
+      }
+    ]
+  }
+}

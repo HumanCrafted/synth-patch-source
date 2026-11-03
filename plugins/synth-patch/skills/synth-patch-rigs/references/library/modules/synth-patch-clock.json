@@ -1,0 +1,149 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-clock",
+  "name": "Synth Patch Clock",
+  "manufacturer": "Synth Patch",
+  "model": "Clock",
+  "description": "Clock module with tempo, a beat light, run and reset inputs, and a gate output with ÷2 and ÷4 divisions",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Tempo",
+            "Clock"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Run Input",
+            "Reset Input"
+          ],
+          [
+            "Clock Output",
+            "÷2 Output",
+            "÷4 Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "tempo": {
+      "name": "Tempo",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.357
+      }
+    },
+    "clock": {
+      "name": "Clock",
+      "type": "led",
+      "config": {
+        "graphics": "parts:led-round",
+        "numStates": 2,
+        "positionNames": [
+          "Off",
+          "On"
+        ],
+        "ledMode": "continuous"
+      }
+    },
+    "run-input": {
+      "name": "Run Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "reset-input": {
+      "name": "Reset Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "clock-output": {
+      "name": "Clock Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "div-2-output": {
+      "name": "÷2 Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "div-4-output": {
+      "name": "÷4 Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "clock",
+        "type": "clock",
+        "params": {
+          "bpm": {
+            "control": "Tempo",
+            "range": [
+              20,
+              300
+            ]
+          }
+        },
+        "outputs": {
+          "out": "Clock Output",
+          "div2": "÷2 Output",
+          "div4": "÷4 Output"
+        },
+        "inputs": {
+          "run": {
+            "jack": "Run Input"
+          },
+          "reset": {
+            "jack": "Reset Input"
+          }
+        }
+      }
+    ],
+    "leds": {
+      "Clock": {
+        "source": "clock.out",
+        "on": "On",
+        "off": "Off"
+      }
+    }
+  }
+}

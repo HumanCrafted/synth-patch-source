@@ -1,0 +1,154 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-envelope",
+  "name": "Synth Patch Envelope",
+  "manufacturer": "Synth Patch",
+  "model": "Envelope",
+  "description": "ADSR envelope module with a gate input and an envelope output",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Attack",
+            "Decay",
+            "Sustain",
+            "Release"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Gate Input",
+            "Envelope Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "attack": {
+      "name": "Attack",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.2
+      }
+    },
+    "decay": {
+      "name": "Decay",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.6
+      }
+    },
+    "sustain": {
+      "name": "Sustain",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.6
+      }
+    },
+    "release": {
+      "name": "Release",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.6
+      }
+    },
+    "gate-input": {
+      "name": "Gate Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "envelope-output": {
+      "name": "Envelope Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "env",
+        "type": "adsr",
+        "params": {
+          "attack": {
+            "control": "Attack",
+            "range": [
+              0.001,
+              5
+            ],
+            "curve": "exp"
+          },
+          "decay": {
+            "control": "Decay",
+            "range": [
+              0.005,
+              5
+            ],
+            "curve": "exp"
+          },
+          "sustain": {
+            "control": "Sustain",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "release": {
+            "control": "Release",
+            "range": [
+              0.005,
+              8
+            ],
+            "curve": "exp"
+          }
+        },
+        "inputs": {
+          "gate": {
+            "jack": "Gate Input"
+          }
+        },
+        "outputs": {
+          "out": "Envelope Output"
+        }
+      }
+    ]
+  }
+}

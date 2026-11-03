@@ -1,0 +1,39 @@
+{
+  "format": "synthjson/2",
+  "slug": "custom-slow-lfo",
+  "name": "Custom Slow LFO",
+  "manufacturer": "Custom",
+  "model": "Slow LFO",
+  "description": "LFO module from 0.002 to 2 Hz with a unipolar output, for sweeps that take minutes",
+  "extends": "synth-patch-lfo",
+  "control_config": {
+    "unipolar-output": {
+      "name": "Unipolar Output",
+      "type": "output-jack",
+      "config": { "type": "output", "graphic": "parts:jack-hex-small" }
+    }
+  },
+  "panel": {
+    "sections": [
+      { "rows": [["Rate", "Shape", "CV Amount"]] },
+      { "rows": [["Rate CV Input", "LFO Output", "Unipolar Output"]] }
+    ]
+  },
+  "engine": {
+    "blocks": {
+      "lfo": {
+        "params": {
+          "rate": { "control": "Rate", "range": [0.002, 2], "curve": "exp" },
+          "shape": { "control": "Shape", "steps": { "Sine": 0, "Triangle": 1, "Saw": 2, "Square": 3 } },
+          "rateCvAmount": { "control": "CV Amount", "range": [0, 3] }
+        }
+      },
+      "unipolar": {
+        "type": "attenuverter",
+        "params": { "amount": 0.5, "offset": 0.5 },
+        "inputs": { "in": "lfo.out" },
+        "outputs": { "out": "Unipolar Output" }
+      }
+    }
+  }
+}

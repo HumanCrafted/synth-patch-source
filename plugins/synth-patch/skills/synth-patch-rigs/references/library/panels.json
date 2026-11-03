@@ -1,0 +1,78 @@
+{
+  "synth-patch-oscillator": [
+    1240,
+    1239
+  ],
+  "synth-patch-noise": [
+    520,
+    634
+  ],
+  "synth-patch-filter": [
+    1575,
+    1021
+  ],
+  "synth-patch-vca": [
+    896,
+    750
+  ],
+  "synth-patch-mixer": [
+    1280,
+    750
+  ],
+  "synth-patch-speaker": [
+    592,
+    1222
+  ],
+  "synth-patch-keyboard": [
+    2272,
+    2200
+  ],
+  "synth-patch-envelope": [
+    1280,
+    750
+  ],
+  "synth-patch-lfo": [
+    948,
+    762
+  ],
+  "synth-patch-random": [
+    1140,
+    750
+  ],
+  "synth-patch-clock": [
+    760,
+    956
+  ],
+  "synth-patch-sequencer": [
+    1712,
+    1509
+  ],
+  "synth-patch-delay": [
+    988,
+    750
+  ],
+  "synth-patch-reverb": [
+    988,
+    750
+  ],
+  "synth-patch-glide": [
+    591,
+    750
+  ],
+  "synth-patch-attenuverter": [
+    637,
+    1348
+  ],
+  "synth-patch-quantizer": [
+    973,
+    762
+  ],
+  "synth-patch-code": [
+    1280,
+    1004
+  ],
+  "example-instruments-demo-one": [
+    2268,
+    1020
+  ]
+}

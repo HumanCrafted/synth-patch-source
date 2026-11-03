@@ -1,0 +1,165 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-random",
+  "name": "Synth Patch Random",
+  "manufacturer": "Synth Patch",
+  "model": "Random",
+  "description": "Random voltage and sample-and-hold module: on each clock tick it holds the Sample Input (or new random noise with nothing patched), stepped and smoothed, with its own clock",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Rate",
+            "Smooth",
+            "Clock"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Clock Input",
+            "Sample Input",
+            "Stepped Output",
+            "Smooth Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "rate": {
+      "name": "Rate",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.5
+      }
+    },
+    "smooth": {
+      "name": "Smooth",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.3
+      }
+    },
+    "clock": {
+      "name": "Clock",
+      "type": "led",
+      "config": {
+        "graphics": "parts:led-round",
+        "numStates": 2,
+        "positionNames": [
+          "Off",
+          "On"
+        ],
+        "ledMode": "continuous"
+      }
+    },
+    "clock-input": {
+      "name": "Clock Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "sample-input": {
+      "name": "Sample Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "stepped-output": {
+      "name": "Stepped Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "smooth-output": {
+      "name": "Smooth Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "clock",
+        "type": "clock",
+        "params": {
+          "bpm": {
+            "control": "Rate",
+            "range": [
+              15,
+              960
+            ],
+            "curve": "exp"
+          }
+        }
+      },
+      {
+        "id": "random",
+        "type": "random",
+        "params": {
+          "smooth": {
+            "control": "Smooth",
+            "range": [
+              0.001,
+              2
+            ],
+            "curve": "exp"
+          }
+        },
+        "inputs": {
+          "trigger": {
+            "jack": "Clock Input",
+            "normal": "clock.out"
+          },
+          "sample": {
+            "jack": "Sample Input"
+          }
+        },
+        "outputs": {
+          "stepped": "Stepped Output",
+          "smooth": "Smooth Output"
+        }
+      }
+    ],
+    "leds": {
+      "Clock": {
+        "source": "clock.out",
+        "on": "On",
+        "off": "Off"
+      }
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-vca",
+  "name": "Synth Patch VCA",
+  "manufacturer": "Synth Patch",
+  "model": "VCA",
+  "description": "Voltage-controlled amplifier module with gain, initial level and a CV amount",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Gain",
+            "Initial Level",
+            "CV Amount"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "VCA Input",
+            "CV Input",
+            "VCA Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "gain": {
+      "name": "Gain",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.5
+      }
+    },
+    "initial-level": {
+      "name": "Initial Level",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005
+      }
+    },
+    "cv-amount": {
+      "name": "CV Amount",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 1
+      }
+    },
+    "vca-input": {
+      "name": "VCA Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cv-input": {
+      "name": "CV Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "vca-output": {
+      "name": "VCA Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "vca",
+        "type": "vca",
+        "params": {
+          "gain": {
+            "control": "Gain",
+            "range": [
+              0,
+              2
+            ]
+          },
+          "bias": {
+            "control": "Initial Level",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "cvAmount": {
+            "control": "CV Amount",
+            "range": [
+              0,
+              1
+            ]
+          }
+        },
+        "inputs": {
+          "in": {
+            "jack": "VCA Input"
+          },
+          "cv": {
+            "jack": "CV Input"
+          }
+        },
+        "outputs": {
+          "out": "VCA Output"
+        }
+      }
+    ]
+  }
+}

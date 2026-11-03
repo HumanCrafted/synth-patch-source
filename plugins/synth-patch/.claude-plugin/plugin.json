@@ -1,0 +1,13 @@
+{
+  "name": "synth-patch",
+  "version": "1.0.0",
+  "description": "Write Synth Patch rigs (patchjson/2) from a description of a sound: the standard modules, exact control and jack names, patch values, cables, layout, and a checker that reads rigs the way the app does. Also variants of a module (synthjson/2).",
+  "author": {
+    "name": "Human Crafted",
+    "url": "https://synthpatch.io"
+  },
+  "homepage": "https://synthpatch.io",
+  "repository": "https://github.com/HumanCrafted/synth-patch-source",
+  "license": "CC-BY-4.0 AND MIT",
+  "keywords": ["synth-patch", "synthesizer", "modular", "patch", "rig"]
+}

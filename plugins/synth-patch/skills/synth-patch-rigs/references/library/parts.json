@@ -1,0 +1,773 @@
+{
+  "parts": {
+    "knob-moog-large": {
+      "type": "knob",
+      "set": "sp-knob-moog-212w",
+      "size": 212,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-knob-moog-212w=default.svg"
+      ],
+      "from": "demo1-knob-212w (Moog style, as gm-knob-212w)"
+    },
+    "knob-moog-small": {
+      "type": "knob",
+      "set": "sp-knob-moog-138w",
+      "size": 138,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-knob-moog-138w=default.svg"
+      ],
+      "from": "muse-knob-138w"
+    },
+    "knob-solid-large": {
+      "type": "knob",
+      "set": "sp-knob-solid-153w",
+      "size": 153,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-knob-solid-153w=default.svg"
+      ],
+      "from": "edge-knob-153w"
+    },
+    "knob-solid-small": {
+      "type": "knob",
+      "set": "sp-knob-solid-91w",
+      "size": 91,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-knob-solid-91w=default.svg"
+      ],
+      "from": "demo1-knob-91w (as gm-knob-91w)"
+    },
+    "knob-ring-large": {
+      "type": "knob",
+      "set": "sp-knob-ring-153w",
+      "size": 153,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-knob-ring-153w=default.svg"
+      ],
+      "from": "coast-knob-153w"
+    },
+    "knob-ring-small": {
+      "type": "knob",
+      "set": "sp-knob-ring-117w",
+      "size": 117,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-knob-ring-117w=default.svg"
+      ],
+      "from": "strega-knob-117w"
+    },
+    "knob-trim": {
+      "type": "knob",
+      "set": "sp-knob-trim-48w",
+      "size": 48,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-knob-trim-48w=default.svg"
+      ],
+      "from": "min-knob-45w"
+    },
+    "rotary-switch-pointer-4pos": {
+      "type": "rotary-switch",
+      "set": "sp-rotary-switch-pointer-4pos-224w",
+      "size": 224,
+      "states": [
+        "neg45",
+        "neg15",
+        "15",
+        "45"
+      ],
+      "files": [
+        "sp-rotary-switch-pointer-4pos-224w=neg45.svg",
+        "sp-rotary-switch-pointer-4pos-224w=neg15.svg",
+        "sp-rotary-switch-pointer-4pos-224w=15.svg",
+        "sp-rotary-switch-pointer-4pos-224w=45.svg"
+      ],
+      "from": "demo1-rotary-switch-224w (as gm-rotary-switch-224w)"
+    },
+    "rotary-switch-pointer-6pos": {
+      "type": "rotary-switch",
+      "set": "sp-rotary-switch-pointer-6pos-224w",
+      "size": 224,
+      "states": [
+        "neg75",
+        "neg45",
+        "neg15",
+        "15",
+        "45",
+        "75"
+      ],
+      "files": [
+        "sp-rotary-switch-pointer-6pos-224w=neg75.svg",
+        "sp-rotary-switch-pointer-6pos-224w=neg45.svg",
+        "sp-rotary-switch-pointer-6pos-224w=neg15.svg",
+        "sp-rotary-switch-pointer-6pos-224w=15.svg",
+        "sp-rotary-switch-pointer-6pos-224w=45.svg",
+        "sp-rotary-switch-pointer-6pos-224w=75.svg"
+      ],
+      "from": "m-6pos-rotary-switch-224w"
+    },
+    "button-square": {
+      "type": "button",
+      "set": "sp-button-square-76w",
+      "size": 76,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "variants": {
+        "light": [
+          "sp-button-square-76w=inactive, color=light.svg",
+          "sp-button-square-76w=active, color=light.svg"
+        ],
+        "grey": [
+          "sp-button-square-76w=inactive, color=grey.svg",
+          "sp-button-square-76w=active, color=grey.svg"
+        ],
+        "dark": [
+          "sp-button-square-76w=inactive, color=dark.svg",
+          "sp-button-square-76w=active, color=dark.svg"
+        ],
+        "lit-amber": [
+          "sp-button-square-76w=inactive, color=lit-amber.svg",
+          "sp-button-square-76w=active, color=lit-amber.svg"
+        ]
+      },
+      "default": "grey",
+      "from": "demo1-button-76w"
+    },
+    "button-round": {
+      "type": "button",
+      "set": "sp-button-round-96w",
+      "size": 96,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "variants": {
+        "light": [
+          "sp-button-round-96w=inactive, color=light.svg",
+          "sp-button-round-96w=active, color=light.svg"
+        ],
+        "grey": [
+          "sp-button-round-96w=inactive, color=grey.svg",
+          "sp-button-round-96w=active, color=grey.svg"
+        ],
+        "dark": [
+          "sp-button-round-96w=inactive, color=dark.svg",
+          "sp-button-round-96w=active, color=dark.svg"
+        ],
+        "lit-amber": [
+          "sp-button-round-96w=inactive, color=lit-amber.svg",
+          "sp-button-round-96w=active, color=lit-amber.svg"
+        ]
+      },
+      "default": "grey",
+      "from": "sub37-round-button-96w"
+    },
+    "button-rect": {
+      "type": "button",
+      "set": "sp-button-rect-132w-76h",
+      "size": 132,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "variants": {
+        "light": [
+          "sp-button-rect-132w-76h=inactive, color=light.svg",
+          "sp-button-rect-132w-76h=active, color=light.svg"
+        ],
+        "grey": [
+          "sp-button-rect-132w-76h=inactive, color=grey.svg",
+          "sp-button-rect-132w-76h=active, color=grey.svg"
+        ],
+        "dark": [
+          "sp-button-rect-132w-76h=inactive, color=dark.svg",
+          "sp-button-rect-132w-76h=active, color=dark.svg"
+        ],
+        "lit-amber": [
+          "sp-button-rect-132w-76h=inactive, color=lit-amber.svg",
+          "sp-button-rect-132w-76h=active, color=lit-amber.svg"
+        ]
+      },
+      "default": "grey",
+      "from": "sub37-button-132w-76h"
+    },
+    "button-triangle": {
+      "type": "button",
+      "set": "sp-button-triangle-102w",
+      "size": 102,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "variants": {
+        "light-left": [
+          "sp-button-triangle-102w=inactive, color=light, Direction=left.svg",
+          "sp-button-triangle-102w=active, color=light, Direction=left.svg"
+        ],
+        "light-right": [
+          "sp-button-triangle-102w=inactive, color=light, Direction=right.svg",
+          "sp-button-triangle-102w=active, color=light, Direction=right.svg"
+        ],
+        "grey-left": [
+          "sp-button-triangle-102w=inactive, color=grey, Direction=left.svg",
+          "sp-button-triangle-102w=active, color=grey, Direction=left.svg"
+        ],
+        "grey-right": [
+          "sp-button-triangle-102w=inactive, color=grey, Direction=right.svg",
+          "sp-button-triangle-102w=active, color=grey, Direction=right.svg"
+        ],
+        "dark-left": [
+          "sp-button-triangle-102w=inactive, color=dark, Direction=left.svg",
+          "sp-button-triangle-102w=active, color=dark, Direction=left.svg"
+        ],
+        "dark-right": [
+          "sp-button-triangle-102w=inactive, color=dark, Direction=right.svg",
+          "sp-button-triangle-102w=active, color=dark, Direction=right.svg"
+        ],
+        "lit-amber-left": [
+          "sp-button-triangle-102w=inactive, color=lit-amber, Direction=left.svg",
+          "sp-button-triangle-102w=active, color=lit-amber, Direction=left.svg"
+        ],
+        "lit-amber-right": [
+          "sp-button-triangle-102w=inactive, color=lit-amber, Direction=right.svg",
+          "sp-button-triangle-102w=active, color=lit-amber, Direction=right.svg"
+        ]
+      },
+      "default": "grey-right",
+      "from": "m32-button-102w"
+    },
+    "touch-round": {
+      "type": "touch-pad",
+      "set": "sp-touch-round-137w",
+      "size": 137,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "files": [
+        "sp-touch-round-137w=inactive.svg",
+        "sp-touch-round-137w=active.svg"
+      ],
+      "from": "strega-touch-137w"
+    },
+    "touch-square": {
+      "type": "touch-pad",
+      "set": "sp-touch-square-107w",
+      "size": 107,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "files": [
+        "sp-touch-square-107w=inactive.svg",
+        "sp-touch-square-107w=active.svg"
+      ],
+      "from": "strega-touch-107w"
+    },
+    "toggle-bat-3pos": {
+      "type": "toggle",
+      "set": "sp-toggle-bat-3pos-96w",
+      "size": 96,
+      "states": [
+        "left",
+        "middle",
+        "right"
+      ],
+      "files": [
+        "sp-toggle-bat-3pos-96w=left.svg",
+        "sp-toggle-bat-3pos-96w=middle.svg",
+        "sp-toggle-bat-3pos-96w=right.svg"
+      ],
+      "from": "demo1-toggle-96w (as gm-toggle-96w)"
+    },
+    "toggle-bat-2pos": {
+      "type": "toggle",
+      "set": "sp-toggle-bat-2pos-96w",
+      "size": 96,
+      "states": [
+        "left",
+        "right"
+      ],
+      "files": [
+        "sp-toggle-bat-2pos-96w=left.svg",
+        "sp-toggle-bat-2pos-96w=right.svg"
+      ],
+      "from": "demo1-toggle-96w without the middle position"
+    },
+    "toggle-slide-3pos": {
+      "type": "toggle",
+      "set": "sp-toggle-slide-3pos-48w-122h",
+      "size": 123,
+      "states": [
+        "up",
+        "middle",
+        "down"
+      ],
+      "files": [
+        "sp-toggle-slide-3pos-48w-122h=up.svg",
+        "sp-toggle-slide-3pos-48w-122h=middle.svg",
+        "sp-toggle-slide-3pos-48w-122h=down.svg"
+      ],
+      "from": "2600-toggle-48w-122h (the house slide switch)"
+    },
+    "toggle-slide-2pos": {
+      "type": "toggle",
+      "set": "sp-toggle-slide-2pos-48w-122h",
+      "size": 123,
+      "states": [
+        "up",
+        "down"
+      ],
+      "files": [
+        "sp-toggle-slide-2pos-48w-122h=up.svg",
+        "sp-toggle-slide-2pos-48w-122h=down.svg"
+      ],
+      "from": "2600-toggle-48w-122h without the middle position"
+    },
+    "toggle-mini-2pos": {
+      "type": "toggle",
+      "set": "sp-toggle-mini-2pos-40w",
+      "size": 40,
+      "states": [
+        "up",
+        "down"
+      ],
+      "files": [
+        "sp-toggle-mini-2pos-40w=up.svg",
+        "sp-toggle-mini-2pos-40w=down.svg"
+      ],
+      "from": "edge-toggle-40w"
+    },
+    "toggle-rocker": {
+      "type": "toggle",
+      "set": "sp-toggle-rocker-256w",
+      "size": 256,
+      "states": [
+        "left-or-bottom pressed",
+        "right-or-top pressed"
+      ],
+      "variants": {
+        "black-horiz": [
+          "sp-toggle-rocker-256w=left, color=black, orientation=horiz.svg",
+          "sp-toggle-rocker-256w=right, color=black, orientation=horiz.svg"
+        ],
+        "blue-horiz": [
+          "sp-toggle-rocker-256w=left, color=blue, orientation=horiz.svg",
+          "sp-toggle-rocker-256w=right, color=blue, orientation=horiz.svg"
+        ],
+        "orange-horiz": [
+          "sp-toggle-rocker-256w=left, color=orange, orientation=horiz.svg",
+          "sp-toggle-rocker-256w=right, color=orange, orientation=horiz.svg"
+        ],
+        "black-vert": [
+          "sp-toggle-rocker-256w=bottom, color=black, orientation=vert.svg",
+          "sp-toggle-rocker-256w=top, color=black, orientation=vert.svg"
+        ],
+        "blue-vert": [
+          "sp-toggle-rocker-256w=bottom, color=blue, orientation=vert.svg",
+          "sp-toggle-rocker-256w=top, color=blue, orientation=vert.svg"
+        ],
+        "orange-vert": [
+          "sp-toggle-rocker-256w=bottom, color=orange, orientation=vert.svg",
+          "sp-toggle-rocker-256w=top, color=orange, orientation=vert.svg"
+        ]
+      },
+      "default": "black-horiz",
+      "from": "redrawn 2026-10-23 from the Minimoog Model D rocker (d-toggle-256w) colors: the variant names the pressed side; the raised side widens to a light ridge line and returns to body width at its far end"
+    },
+    "slider": {
+      "type": "slider",
+      "set": "sp-slider-198w",
+      "size": 198,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-slider-198w=default.svg"
+      ],
+      "from": "demo1-slider-198w (as gm-slider-198w); the cap only, the track is panel art"
+    },
+    "wheel": {
+      "type": "wheel",
+      "set": "sp-wheel-89w-1239h",
+      "size": 89,
+      "height": 1239,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-wheel-89w-1239h=default.svg"
+      ],
+      "config": {
+        "graphicWidth": 89,
+        "graphicHeight": 1239,
+        "windowWidth": 92,
+        "windowHeight": 625,
+        "travelRange": 534,
+        "maskRadius": 18
+      },
+      "from": "gm-wheel-slider-89w-1239h"
+    },
+    "joystick": {
+      "type": "joystick",
+      "set": "sp-joystick-79w",
+      "size": 80,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-joystick-79w=default.svg"
+      ],
+      "config": {
+        "size": 80,
+        "travelRadius": 102,
+        "gate": "circle"
+      },
+      "from": "mlxd-joystick-79w; the cap only, the app draws the stem"
+    },
+    "jack-hex-small": {
+      "type": "jack",
+      "set": "sp-jack-hex-106w",
+      "size": 106,
+      "states": [
+        "input",
+        "output"
+      ],
+      "files": [
+        "sp-jack-hex-106w=input.svg",
+        "sp-jack-hex-106w=output.svg"
+      ],
+      "from": "demo1-jack-106w (as gm-jack-106w), 3.5 mm"
+    },
+    "jack-hex-large": {
+      "type": "jack",
+      "set": "sp-jack-hex-150w",
+      "size": 150,
+      "states": [
+        "input",
+        "output"
+      ],
+      "files": [
+        "sp-jack-hex-150w=input.svg",
+        "sp-jack-hex-150w=output.svg"
+      ],
+      "from": "gm-jack-150w, 1/4 in"
+    },
+    "jack-round-small": {
+      "type": "jack",
+      "set": "sp-jack-round-81w",
+      "size": 81,
+      "states": [
+        "input",
+        "output"
+      ],
+      "files": [
+        "sp-jack-round-81w=input.svg",
+        "sp-jack-round-81w=output.svg"
+      ],
+      "from": "mf-jack-81w, 3.5 mm"
+    },
+    "jack-round-large": {
+      "type": "jack",
+      "set": "sp-jack-round-138w",
+      "size": 138,
+      "states": [
+        "input",
+        "output"
+      ],
+      "files": [
+        "sp-jack-round-138w=input.svg",
+        "sp-jack-round-138w=output.svg"
+      ],
+      "from": "mf-jack-138w, 1/4 in"
+    },
+    "jack-solid": {
+      "type": "jack",
+      "set": "sp-jack-solid-98w",
+      "size": 98,
+      "states": [
+        "input",
+        "output"
+      ],
+      "files": [
+        "sp-jack-solid-98w=input.svg",
+        "sp-jack-solid-98w=output.svg"
+      ],
+      "from": "edge-jack-98w"
+    },
+    "jack-pin": {
+      "type": "jack",
+      "set": "sp-jack-pin-21w",
+      "size": 21,
+      "states": [
+        "input",
+        "output"
+      ],
+      "files": [
+        "sp-jack-pin-21w=input.svg",
+        "sp-jack-pin-21w=output.svg"
+      ],
+      "from": "Bastl Kastle Arp Jack.svg (pin header socket)"
+    },
+    "connector-midi": {
+      "type": "connector",
+      "set": "sp-connector-midi-194w",
+      "size": 194,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-connector-midi-194w=default.svg"
+      ],
+      "from": "gm-jack-midi-194w"
+    },
+    "connector-usb-a": {
+      "type": "connector",
+      "set": "sp-connector-usb-a-160w",
+      "size": 160,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-connector-usb-a-160w=default.svg"
+      ],
+      "from": "muse-jack-usb-a-160w"
+    },
+    "connector-usb-b": {
+      "type": "connector",
+      "set": "sp-connector-usb-b-150w",
+      "size": 150,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-connector-usb-b-150w=default.svg"
+      ],
+      "from": "gm-jack-usb-150w"
+    },
+    "connector-usb-c": {
+      "type": "connector",
+      "set": "sp-connector-usb-c-110w",
+      "size": 110,
+      "states": [
+        "default"
+      ],
+      "files": [
+        "sp-connector-usb-c-110w=output.svg"
+      ],
+      "from": "messenger-jack-usb-110w"
+    },
+    "led-round": {
+      "type": "led",
+      "set": "sp-led-round-52w",
+      "size": 52,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "variants": {
+        "red": [
+          "sp-led-round-52w=inactive, color=default.svg",
+          "sp-led-round-52w=active, color=red.svg"
+        ],
+        "amber": [
+          "sp-led-round-52w=inactive, color=default.svg",
+          "sp-led-round-52w=active, color=amber.svg"
+        ],
+        "yellow": [
+          "sp-led-round-52w=inactive, color=default.svg",
+          "sp-led-round-52w=active, color=yellow.svg"
+        ],
+        "green": [
+          "sp-led-round-52w=inactive, color=default.svg",
+          "sp-led-round-52w=active, color=green.svg"
+        ],
+        "blue": [
+          "sp-led-round-52w=inactive, color=default.svg",
+          "sp-led-round-52w=active, color=blue.svg"
+        ]
+      },
+      "default": "red",
+      "from": "demo1-led-52w (as gm-led-52w)"
+    },
+    "led-square": {
+      "type": "led",
+      "set": "sp-led-square-87w",
+      "size": 87,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "variants": {
+        "red": [
+          "sp-led-square-87w=inactive, color=default.svg",
+          "sp-led-square-87w=active, color=red.svg"
+        ],
+        "amber": [
+          "sp-led-square-87w=inactive, color=default.svg",
+          "sp-led-square-87w=active, color=amber.svg"
+        ],
+        "yellow": [
+          "sp-led-square-87w=inactive, color=default.svg",
+          "sp-led-square-87w=active, color=yellow.svg"
+        ],
+        "green": [
+          "sp-led-square-87w=inactive, color=default.svg",
+          "sp-led-square-87w=active, color=green.svg"
+        ],
+        "blue": [
+          "sp-led-square-87w=inactive, color=default.svg",
+          "sp-led-square-87w=active, color=blue.svg"
+        ]
+      },
+      "default": "red",
+      "from": "coast-led-dynamics-87w"
+    },
+    "led-bar": {
+      "type": "led",
+      "set": "sp-led-bar-23w-106h",
+      "size": 106,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "variants": {
+        "red": [
+          "sp-led-bar-23w-106h=inactive, color=default.svg",
+          "sp-led-bar-23w-106h=active, color=red.svg"
+        ],
+        "amber": [
+          "sp-led-bar-23w-106h=inactive, color=default.svg",
+          "sp-led-bar-23w-106h=active, color=amber.svg"
+        ],
+        "yellow": [
+          "sp-led-bar-23w-106h=inactive, color=default.svg",
+          "sp-led-bar-23w-106h=active, color=yellow.svg"
+        ],
+        "green": [
+          "sp-led-bar-23w-106h=inactive, color=default.svg",
+          "sp-led-bar-23w-106h=active, color=green.svg"
+        ],
+        "blue": [
+          "sp-led-bar-23w-106h=inactive, color=default.svg",
+          "sp-led-bar-23w-106h=active, color=blue.svg"
+        ]
+      },
+      "default": "red",
+      "from": "control-led-23w-106h"
+    },
+    "key-natural-cut-left": {
+      "type": "key",
+      "set": "sp-key-natural-270w-1596h",
+      "size": 270,
+      "height": 1596,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "files": [
+        "sp-key-natural-270w-1596h=cut-left, State=inactive.svg",
+        "sp-key-natural-270w-1596h=cut-left, State=active.svg"
+      ],
+      "from": "gm-natural-key-270w-1596h"
+    },
+    "key-natural-cut-right": {
+      "type": "key",
+      "set": "sp-key-natural-270w-1596h",
+      "size": 270,
+      "height": 1596,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "files": [
+        "sp-key-natural-270w-1596h=cut-right, State=inactive.svg",
+        "sp-key-natural-270w-1596h=cut-right, State=active.svg"
+      ],
+      "from": "gm-natural-key-270w-1596h"
+    },
+    "key-natural-cut-both": {
+      "type": "key",
+      "set": "sp-key-natural-270w-1596h",
+      "size": 270,
+      "height": 1596,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "files": [
+        "sp-key-natural-270w-1596h=cut-both, State=inactive.svg",
+        "sp-key-natural-270w-1596h=cut-both, State=active.svg"
+      ],
+      "from": "gm-natural-key-270w-1596h"
+    },
+    "key-natural-full": {
+      "type": "key",
+      "set": "sp-key-natural-270w-1596h",
+      "size": 270,
+      "height": 1596,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "files": [
+        "sp-key-natural-270w-1596h=full, State=inactive.svg",
+        "sp-key-natural-270w-1596h=full, State=active.svg"
+      ],
+      "from": "gm-natural-key-270w-1596h"
+    },
+    "key-accidental": {
+      "type": "key",
+      "set": "sp-key-accidental-135w-1046h",
+      "size": 135,
+      "height": 1046,
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "files": [
+        "sp-key-accidental-135w-1046h=full, State=inactive.svg",
+        "sp-key-accidental-135w-1046h=full, State=active.svg"
+      ],
+      "from": "gm-accidental-key-135w-1046h"
+    },
+    "speaker-grill": {
+      "type": "graphic",
+      "set": "sp-speaker-grill-400w",
+      "size": 400,
+      "states": [
+        "default"
+      ],
+      "variants": {
+        "round": [
+          "sp-speaker-grill-400w=round.svg"
+        ],
+        "square": [
+          "sp-speaker-grill-400w=square.svg"
+        ]
+      },
+      "default": "round",
+      "from": "new (2026-10-23): hex-packed 22 px holes at a 32 px pitch, no outline; after the Auxy grill and Braun"
+    }
+  }
+}

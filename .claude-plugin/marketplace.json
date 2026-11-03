@@ -1,0 +1,16 @@
+{
+  "name": "synth-patch-source",
+  "description": "Skills for the Synth Patch file formats: writing rigs and module variants for synthpatch.io.",
+  "owner": {
+    "name": "Human Crafted",
+    "url": "https://synthpatch.io"
+  },
+  "plugins": [
+    {
+      "name": "synth-patch",
+      "source": "./plugins/synth-patch",
+      "description": "Write Synth Patch rigs (patchjson/2) and module variants from a description of a sound, checked the way the app reads them.",
+      "version": "1.0.0"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-noise",
+  "name": "Synth Patch Noise",
+  "manufacturer": "Synth Patch",
+  "model": "Noise",
+  "description": "Noise module: white, pink or brown noise",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Color"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Noise Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "color": {
+      "name": "Color",
+      "type": "toggle",
+      "config": {
+        "graphics": "parts:toggle-bat-3pos",
+        "positions": 3,
+        "positionNames": [
+          "White",
+          "Pink",
+          "Brown"
+        ],
+        "printedLabels": [
+          "WHT",
+          "PNK",
+          "BRN"
+        ]
+      }
+    },
+    "noise-output": {
+      "name": "Noise Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "noise",
+        "type": "noise",
+        "outputs": {
+          "out": "Noise Output"
+        },
+        "params": {
+          "color": {
+            "control": "Color",
+            "steps": {
+              "White": 0,
+              "Pink": 1,
+              "Brown": 2
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-reverb",
+  "name": "Synth Patch Reverb",
+  "manufacturer": "Synth Patch",
+  "model": "Reverb",
+  "description": "Plate reverb module (after Dattorro) with size, damping and mix",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Size",
+            "Damping",
+            "Mix"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Reverb Input",
+            "Reverb Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "size": {
+      "name": "Size",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.6
+      }
+    },
+    "damping": {
+      "name": "Damping",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.4
+      }
+    },
+    "mix": {
+      "name": "Mix",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.3
+      }
+    },
+    "reverb-input": {
+      "name": "Reverb Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "reverb-output": {
+      "name": "Reverb Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "reverb",
+        "type": "reverb",
+        "params": {
+          "size": {
+            "control": "Size",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "damping": {
+            "control": "Damping",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "mix": {
+            "control": "Mix",
+            "range": [
+              0,
+              1
+            ]
+          }
+        },
+        "inputs": {
+          "in": {
+            "jack": "Reverb Input"
+          }
+        },
+        "outputs": {
+          "out": "Reverb Output"
+        }
+      }
+    ]
+  }
+}

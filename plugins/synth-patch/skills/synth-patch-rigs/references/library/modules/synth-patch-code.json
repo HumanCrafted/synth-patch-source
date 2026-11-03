@@ -1,0 +1,197 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-code",
+  "name": "Synth Patch Code",
+  "manufacturer": "Synth Patch",
+  "model": "Code",
+  "description": "Code module: four inputs, four knobs and JavaScript that runs once per sample",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "P1",
+            "P2",
+            "P3",
+            "P4"
+          ],
+          [
+            "Code"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "A Input",
+            "B Input",
+            "C Input",
+            "D Input",
+            "Code Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "p1": {
+      "name": "P1",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005
+      }
+    },
+    "p2": {
+      "name": "P2",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005
+      }
+    },
+    "p3": {
+      "name": "P3",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005
+      }
+    },
+    "p4": {
+      "name": "P4",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005
+      }
+    },
+    "code": {
+      "name": "Code",
+      "type": "code",
+      "config": {
+        "language": "javascript",
+        "default": "// a-d: inputs, p[0]-p[3]: knobs 0..1, t: seconds,\n// state: an object that keeps values between samples.\n// Return one output sample.\n\n// Wavefolder: drive the input into a sine\nconst drive = 1 + p[0] * 8;\nreturn Math.sin(a * drive);"
+      }
+    },
+    "a-input": {
+      "name": "A Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "b-input": {
+      "name": "B Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "c-input": {
+      "name": "C Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "d-input": {
+      "name": "D Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "code-output": {
+      "name": "Code Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "code",
+        "type": "code",
+        "params": {
+          "p1": {
+            "control": "P1",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "p2": {
+            "control": "P2",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "p3": {
+            "control": "P3",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "p4": {
+            "control": "P4",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "code": {
+            "control": "Code"
+          }
+        },
+        "inputs": {
+          "a": {
+            "jack": "A Input"
+          },
+          "b": {
+            "jack": "B Input"
+          },
+          "c": {
+            "jack": "C Input"
+          },
+          "d": {
+            "jack": "D Input"
+          }
+        },
+        "outputs": {
+          "out": "Code Output"
+        }
+      }
+    ]
+  }
+}

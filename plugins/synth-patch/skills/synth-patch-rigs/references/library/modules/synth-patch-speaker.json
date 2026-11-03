@@ -1,0 +1,98 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-speaker",
+  "name": "Synth Patch Speaker",
+  "manufacturer": "Synth Patch",
+  "model": "Speaker",
+  "description": "Speaker module: whatever reaches its input is what you hear",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Speaker Grill"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Level"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Speaker Input"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "speaker-grill": {
+      "name": "Speaker Grill",
+      "type": "graphic",
+      "config": {
+        "graphic": "parts:speaker-grill:round"
+      }
+    },
+    "level": {
+      "name": "Level",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.8
+      }
+    },
+    "speaker-input": {
+      "name": "Speaker Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "amp",
+        "type": "vca",
+        "params": {
+          "gain": {
+            "control": "Level",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "bias": 1
+        },
+        "inputs": {
+          "in": {
+            "jack": "Speaker Input"
+          }
+        }
+      }
+    ],
+    "output": "amp.out"
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-filter",
+  "name": "Synth Patch Filter",
+  "manufacturer": "Synth Patch",
+  "model": "Filter",
+  "description": "Four-pole ladder filter module with low-pass and high-pass outputs, resonance, envelope amount, key tracking (V/Oct input) and cutoff CV",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Cutoff",
+            "Resonance",
+            "Envelope Amount"
+          ],
+          [
+            "Key Track",
+            "CV Amount"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Filter Input",
+            "V/Oct Input",
+            "Envelope Input",
+            "Cutoff CV Input",
+            "LP Output",
+            "HP Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "cutoff": {
+      "name": "Cutoff",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.5
+      }
+    },
+    "resonance": {
+      "name": "Resonance",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.3
+      }
+    },
+    "envelope-amount": {
+      "name": "Envelope Amount",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "valueRange": "bipolar",
+        "default": 0.5
+      }
+    },
+    "key-track": {
+      "name": "Key Track",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.5
+      }
+    },
+    "cv-amount": {
+      "name": "CV Amount",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.25
+      }
+    },
+    "filter-input": {
+      "name": "Filter Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "v-oct-input": {
+      "name": "V/Oct Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "envelope-input": {
+      "name": "Envelope Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cutoff-cv-input": {
+      "name": "Cutoff CV Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "lp-output": {
+      "name": "LP Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "hp-output": {
+      "name": "HP Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "vcf",
+        "type": "ladder",
+        "params": {
+          "cutoff": {
+            "control": "Cutoff",
+            "range": [
+              20,
+              20000
+            ],
+            "curve": "exp"
+          },
+          "resonance": {
+            "control": "Resonance",
+            "range": [
+              0,
+              1.05
+            ]
+          },
+          "envAmount": {
+            "control": "Envelope Amount",
+            "range": [
+              -6,
+              6
+            ]
+          },
+          "keyTrack": {
+            "control": "Key Track",
+            "range": [
+              0,
+              1
+            ]
+          },
+          "cvAmount": {
+            "control": "CV Amount",
+            "range": [
+              0,
+              4
+            ]
+          }
+        },
+        "inputs": {
+          "in": {
+            "jack": "Filter Input"
+          },
+          "pitch": {
+            "jack": "V/Oct Input"
+          },
+          "env": {
+            "jack": "Envelope Input"
+          },
+          "cutoffCv": {
+            "jack": "Cutoff CV Input"
+          }
+        },
+        "outputs": {
+          "out": "LP Output",
+          "hp": "HP Output"
+        }
+      }
+    ]
+  }
+}

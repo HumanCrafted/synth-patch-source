@@ -1,0 +1,145 @@
+{
+  "format": "synthjson/2",
+  "slug": "synth-patch-lfo",
+  "name": "Synth Patch LFO",
+  "manufacturer": "Synth Patch",
+  "model": "LFO",
+  "description": "Low-frequency oscillator module with rate, four shapes, a rate CV input with amount, and an output",
+  "category": "Modular",
+  "tags": [
+    "module"
+  ],
+  "is_listed": false,
+  "verified": true,
+  "featured": false,
+  "panel": {
+    "sections": [
+      {
+        "rows": [
+          [
+            "Rate",
+            "Shape",
+            "CV Amount"
+          ]
+        ]
+      },
+      {
+        "rows": [
+          [
+            "Rate CV Input",
+            "LFO Output"
+          ]
+        ]
+      }
+    ]
+  },
+  "control_config": {
+    "rate": {
+      "name": "Rate",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-moog-large",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.5
+      }
+    },
+    "shape": {
+      "name": "Shape",
+      "type": "rotary-switch",
+      "config": {
+        "graphics": "parts:rotary-switch-pointer-4pos",
+        "positions": 4,
+        "positionNames": [
+          "Sine",
+          "Triangle",
+          "Saw",
+          "Square"
+        ],
+        "printedLabels": [
+          "SIN",
+          "TRI",
+          "SAW",
+          "SQR"
+        ],
+        "switchMode": "reciprocating"
+      }
+    },
+    "cv-amount": {
+      "name": "CV Amount",
+      "type": "knob",
+      "config": {
+        "graphic": "parts:knob-solid-small",
+        "minDegree": -150,
+        "maxDegree": 150,
+        "sensitivity": 0.005,
+        "default": 0.33
+      }
+    },
+    "rate-cv-input": {
+      "name": "Rate CV Input",
+      "type": "input-jack",
+      "config": {
+        "type": "input",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "lfo-output": {
+      "name": "LFO Output",
+      "type": "output-jack",
+      "config": {
+        "type": "output",
+        "graphic": "parts:jack-hex-small"
+      }
+    },
+    "cableStyle": {
+      "color": "#000000",
+      "width": 22,
+      "curvature": 6
+    }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "lfo",
+        "type": "lfo",
+        "params": {
+          "rate": {
+            "control": "Rate",
+            "range": [
+              0.05,
+              40
+            ],
+            "curve": "exp"
+          },
+          "shape": {
+            "control": "Shape",
+            "steps": {
+              "Sine": 0,
+              "Triangle": 1,
+              "Saw": 2,
+              "Square": 3
+            }
+          },
+          "rateCvAmount": {
+            "control": "CV Amount",
+            "range": [
+              0,
+              3
+            ]
+          }
+        },
+        "outputs": {
+          "out": "LFO Output"
+        },
+        "inputs": {
+          "rateCv": {
+            "jack": "Rate CV Input"
+          }
+        }
+      }
+    ]
+  }
+}
