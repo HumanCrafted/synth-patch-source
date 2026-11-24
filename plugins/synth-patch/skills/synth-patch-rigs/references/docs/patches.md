@@ -4,7 +4,7 @@
 
 A patch is one JSON file: which synth it's for, where each control is set, and which jacks are cabled together. Controls and cables are referenced by **name**, the same names as in the synth's `control_config`, so a patch can be written by hand from a patch sheet.
 
-This page is the one-synth patch, the shape `patchjson/1` defined. `patchjson/2` adds [rigs](rigs.md): several synths on a canvas, cabled together, each set the way this page describes. A one-synth patch is a valid `patchjson/2` file, and a rig reads it as a rig of one. The app writes one-synth patches as `patchjson/1` and rigs as `patchjson/2`; readers accept either version string on either shape.
+This page is the one-synth patch, the shape `patchjson/1` defined. `patchjson/2` adds [rigs](rigs.md): several synths on a canvas, cabled together, each set the way this page describes. A one-synth patch is a valid `patchjson/2` file, and a rig reads it as a rig of one. The app writes one-synth patches as `patchjson/1` and rigs as `patchjson/2`; readers accept either version string on either shape. Going the other way, a rig of exactly one instance pasted as a patch reads as that synth's patch: its controls, the rig's name and notes, and its cables with the instance id dropped (`main/Gate Out` becomes `Gate Out`). Its position is ignored.
 
 The examples: [`examples/patches/example-instruments/demo-one`](https://github.com/HumanCrafted/synth-patch-source/blob/main/examples/patches/example-instruments/demo-one).
 

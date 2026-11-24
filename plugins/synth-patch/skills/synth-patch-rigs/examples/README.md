@@ -64,6 +64,16 @@ Two library synths, no modules: the DFAM's Pitch output → both of the Matriarc
 - Names and values were checked against the app's own panels, fetched by `rig.py` from the public API. Slugs are exact (`moog-dfam-53d6fb`).
 - Knob values are panel positions, not engine units; the notes call them a starting point.
 
+## [Matriarch Drone](matriarch-drone.json)
+
+> An ambient drone patch for my Matriarch.
+
+One library synth and no modules, so it's a one-synth patch, not a rig: `synth` at the top and cables by jack name. It pastes on the Matriarch's own patch page (Patch Data → Paste) and in Rigs.
+
+- Output VCA Mode on Drone holds it open with no key; four oscillators at 16′, 8′, 8′ a fifth up and 4′, slightly detuned.
+- Smooth Random modulation moves the cutoff; the utilities LFO nudges the delay feedback through Delay FB CV In.
+- Checked with `rig.py check` and the app's own patch reader against the Matriarch's panel.
+
 ## From the docs
 
 `references/examples/` holds the two rigs from the format docs: [Wavefolded Bass](../references/examples/wavefolded-bass.json), a Keyboard playing an Oscillator folded by a Code module, and [Demo One Echo](../references/examples/demo-one-echo.json), a drawn synth with its own keys and output, through a Delay module.
