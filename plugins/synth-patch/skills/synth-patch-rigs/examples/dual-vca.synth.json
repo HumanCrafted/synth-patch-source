@@ -1,0 +1,84 @@
+{
+  "format": "synthjson/2",
+  "slug": "custom-dual-vca",
+  "name": "Custom Dual VCA",
+  "manufacturer": "Custom",
+  "model": "Dual VCA",
+  "description": "Two VCAs in one module, each with gain, initial level, signal and CV inputs and its own output, plus a mix of both",
+  "category": "Modular",
+  "tags": ["module"],
+  "panel": {
+    "sections": [
+      {
+        "label": "Channel A",
+        "rows": [["Gain A", "Initial Level A"], ["Input A", "CV Input A", "Output A"]]
+      },
+      {
+        "label": "Channel B",
+        "rows": [["Gain B", "Initial Level B"], ["Input B", "CV Input B", "Output B"]]
+      },
+      { "rows": [["Mix Output"]] }
+    ]
+  },
+  "control_config": {
+    "gain-a": {
+      "name": "Gain A",
+      "type": "knob",
+      "config": { "graphic": "parts:knob-moog-large", "minDegree": -150, "maxDegree": 150, "sensitivity": 0.005, "default": 0.5 }
+    },
+    "initial-level-a": {
+      "name": "Initial Level A",
+      "type": "knob",
+      "config": { "graphic": "parts:knob-solid-small", "minDegree": -150, "maxDegree": 150, "sensitivity": 0.005 }
+    },
+    "input-a": { "name": "Input A", "type": "input-jack", "config": { "type": "input", "graphic": "parts:jack-hex-small" } },
+    "cv-input-a": { "name": "CV Input A", "type": "input-jack", "config": { "type": "input", "graphic": "parts:jack-hex-small" } },
+    "output-a": { "name": "Output A", "type": "output-jack", "config": { "type": "output", "graphic": "parts:jack-hex-small" } },
+    "gain-b": {
+      "name": "Gain B",
+      "type": "knob",
+      "config": { "graphic": "parts:knob-moog-large", "minDegree": -150, "maxDegree": 150, "sensitivity": 0.005, "default": 0.5 }
+    },
+    "initial-level-b": {
+      "name": "Initial Level B",
+      "type": "knob",
+      "config": { "graphic": "parts:knob-solid-small", "minDegree": -150, "maxDegree": 150, "sensitivity": 0.005 }
+    },
+    "input-b": { "name": "Input B", "type": "input-jack", "config": { "type": "input", "graphic": "parts:jack-hex-small" } },
+    "cv-input-b": { "name": "CV Input B", "type": "input-jack", "config": { "type": "input", "graphic": "parts:jack-hex-small" } },
+    "output-b": { "name": "Output B", "type": "output-jack", "config": { "type": "output", "graphic": "parts:jack-hex-small" } },
+    "mix-output": { "name": "Mix Output", "type": "output-jack", "config": { "type": "output", "graphic": "parts:jack-hex-small" } },
+    "cableStyle": { "color": "#000000", "width": 22, "curvature": 6 }
+  },
+  "engine": {
+    "kind": "blocks",
+    "blocks": [
+      {
+        "id": "vca-a",
+        "type": "vca",
+        "params": {
+          "gain": { "control": "Gain A", "range": [0, 2] },
+          "bias": { "control": "Initial Level A", "range": [0, 1] }
+        },
+        "inputs": { "in": { "jack": "Input A" }, "cv": { "jack": "CV Input A" } },
+        "outputs": { "out": "Output A" }
+      },
+      {
+        "id": "vca-b",
+        "type": "vca",
+        "params": {
+          "gain": { "control": "Gain B", "range": [0, 2] },
+          "bias": { "control": "Initial Level B", "range": [0, 1] }
+        },
+        "inputs": { "in": { "jack": "Input B" }, "cv": { "jack": "CV Input B" } },
+        "outputs": { "out": "Output B" }
+      },
+      {
+        "id": "mix",
+        "type": "mixer",
+        "inputs": { "a": "vca-a.out", "b": "vca-b.out" },
+        "outputs": { "out": "Mix Output" }
+      }
+    ]
+  }
+}
