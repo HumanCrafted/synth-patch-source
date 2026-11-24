@@ -3,6 +3,7 @@
 
     python3 scripts/build_reference.py           # write references/
     python3 scripts/build_reference.py --check   # exit 1 if references/ is out of date
+                                                 # (2: the app couldn't be reached)
 
 Everything under references/ comes from here, so names never drift from the
 modules: the docs and the example rigs are copied as they are (links that leave
@@ -10,6 +11,13 @@ docs/ point into the copies or at GitHub), the module packages, Demo One and
 parts.json are copied byte for byte, and module-names.md and panels.json are
 built from them. Run it after any change to docs/, modules/, parts/ or
 examples/rigs/, and commit the result.
+
+It also writes library/app-synths.json: every synth in the app's library, from
+its public API, with each control's and jack's name, type and value settings
+and the panel size (no coordinates or artwork). rig.py reads it when the app
+can't be reached. Without the API, the snapshot already here is kept and the
+script exits 2, so a stale snapshot is never mistaken for a fresh one.
+scripts/package_skill.py runs this before it zips the skill.
 """
 
 import argparse
@@ -141,6 +149,33 @@ def build(out):
         "",
     ]
     (out / "module-names.md").write_text("\n".join(lines))
+    return write_snapshot(lib)
+
+
+def write_snapshot(lib):
+    """library/app-synths.json from the app; False (keeping the snapshot
+    already in references/) when the app can't be reached."""
+    registry = rig.Registry()
+    try:
+        rows = registry.app_list()
+        synths = [rig.snapshot_entry(registry.fetch_live(r["slug"])) for r in sorted(rows, key=lambda r: r["slug"])]
+    except (LookupError, OSError, ValueError) as e:
+        print(f"  Couldn't read the app's library ({getattr(e, 'reason', None) or e}); keeping the snapshot already here.")
+        old = SKILL / "references" / "library" / "app-synths.json"
+        if old.exists():
+            shutil.copyfile(old, lib / "app-synths.json")
+        return False
+    missing = [s["slug"] for s in synths if not s.get("size")]
+    if missing:
+        print(f"  No panel size for: {', '.join(missing)}")
+    doc = {
+        "about": f"Every synth in the Synth Patch app's library, from {rig.APP}/api/synths, for checking rigs when "
+        "the app can't be reached. Written by scripts/build_reference.py; don't edit.",
+        "synths": synths,
+    }
+    (lib / "app-synths.json").write_text(rig.dumps(doc) + "\n")
+    print(f"  Library snapshot: {len(synths)} synths from {rig.APP}")
+    return True
 
 
 def same_tree(a, b):
@@ -159,18 +194,18 @@ def main():
     target = SKILL / "references"
     with tempfile.TemporaryDirectory() as tmp:
         built = Path(tmp) / "references"
-        build(built)
+        fresh = build(built)
         if args.check:
             if target.exists() and same_tree(built, target):
-                print("references/ is up to date.")
-                return 0
+                print("references/ is up to date." + ("" if fresh else " (The library snapshot wasn't checked.)"))
+                return 0 if fresh else 2
             print("references/ is out of date: run scripts/build_reference.py")
             return 1
         if target.exists():
             shutil.rmtree(target)
         shutil.copytree(built, target)
     print(f"Wrote {target.relative_to(REPO)}")
-    return 0
+    return 0 if fresh else 2
 
 
 if __name__ == "__main__":
