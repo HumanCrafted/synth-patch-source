@@ -1,0 +1,38 @@
+{
+  "format": "patchjson/2",
+  "synth": "moog-matriarch-692dc8",
+  "name": "Matriarch Drone",
+  "description": "A patch sheet for the Moog Matriarch: four detuned oscillators held open in Drone mode, a slowly wandering filter and a long ping-pong delay.",
+  "tags": ["patch sheet", "ambient", "drone"],
+  "controls": {
+    "rotarySwitches": {
+      "Oscillator 1 Waveform": "Sawtooth",
+      "Oscillator 2 Octave": "8'",
+      "Oscillator 2 Waveform": "Sawtooth",
+      "Oscillator 3 Octave": "8'",
+      "Oscillator 4 Octave": "4'",
+      "Modulation Waveform": "Smooth Random"
+    },
+    "knobs": {
+      "Oscillator 2 Frequency": 0.03,
+      "Oscillator 3 Frequency": 0.58,
+      "Oscillator 4 Frequency": -0.02,
+      "Mixer Oscillator 1": 0.8,
+      "Mixer Oscillator 2": 0.6,
+      "Mixer Oscillator 3": 0.45,
+      "Mixer Oscillator 4": 0.3,
+      "Filter Cutoff": 0.35,
+      "Filter Resonance 1": 0.4,
+      "Modulation Rate": 0.15,
+      "Modulation Cutoff Amount": 0.3,
+      "Delay Time": 0.7,
+      "Delay Feedback": 0.6,
+      "Delay Mix": 0.45,
+      "Output Main Volume": 0.6
+    },
+    "toggles": { "Output VCA Mode": "Drone" },
+    "buttons": { "Delay Ping Pong": true }
+  },
+  "cables": [{ "from": "Utilities 2 LFO Tri Out", "to": "Delay FB CV In", "color": "Control Blue" }],
+  "notes": "Set **Output VCA Mode** to Drone so it sounds with no key held. The four oscillators sit at 16′, 8′, 8′ a fifth up and 4′, each a little detuned. Smooth Random modulation moves the cutoff slowly; the utilities LFO nudges the delay feedback. Knob positions are a starting point: tune **Oscillator 3 Frequency** to taste, and open **Filter Cutoff** for a brighter drone."
+}

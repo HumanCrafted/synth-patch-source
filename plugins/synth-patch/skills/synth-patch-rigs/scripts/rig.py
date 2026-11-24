@@ -1064,6 +1064,11 @@ def check_rig(data, registry):
         cables.append((fi, fj, ti, tj))
 
     rig_rules(r, instances, by_id, cables)
+    if raw is data and len(instances) == 1 and is_library_synth(instances[0][1]):
+        r.warnings.append(
+            'One library synth and nothing else: write it as a one-synth patch ("synth", "controls", "cables" by jack name) '
+            "so it pastes on the synth's own patch page as well as in Rigs."
+        )
     return r, {"doc": raw, "instances": instances, "cables": cables}
 
 
@@ -1099,7 +1104,7 @@ def rig_rules(r, instances, by_id, cables):
         r.errors.append("The rig has no instances.")
     elif diagram and not own_output:
         r.notes.append(
-            "Only library synths, which are silent: this rig is a patch diagram. "
+            "Only library synths, which are silent: this is a patch diagram. "
             "For sound, add modules (Oscillator → Filter → VCA → Speaker) and cable them in."
         )
     elif not heard and not own_output and not unchecked:

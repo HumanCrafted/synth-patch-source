@@ -120,7 +120,7 @@ If you can't run Python, check by hand: every slug is in `module-names.md`; ever
 
 ### 7. Hand it over
 
-Give the rig as a `.json` file (named after the rig, kebab-case) or a JSON block, then say in a few lines what it does and what to turn. To load it in Synth Patch: open the Play canvas, then **Patch Data → Paste**, and paste the JSON. A rig with a variant or a new module needs that package added first (below). A rig of library synths only is a patch sheet; say so (below).
+Give the rig as a `.json` file (named after the rig, kebab-case) or a JSON block, then say in a few lines what it does and what to turn. To load it in Synth Patch: open **Rigs**, then **Patch Data → Paste**, and paste the JSON. A rig with a variant or a new module needs that package added first (below). A rig of library synths only is a patch sheet; say so, and write a single library synth as a one-synth patch instead (below).
 
 ## Variants
 
@@ -141,7 +141,7 @@ python3 scripts/rig.py check-synth my-variant.synth.json
 python3 scripts/rig.py check rig.json --synth my-variant.synth.json
 ```
 
-Hand over both files. In the Play canvas, the variant goes in first with **Add… → Paste synth JSON…** (it's kept in that browser), then the rig with Patch Data → Paste. The rig names the variant by its slug.
+Hand over both files. In Rigs, the variant goes in first with **Add… → Paste synth JSON…** (it's kept in that browser), then the rig with Patch Data → Paste. The rig names the variant by its slug.
 
 ## New modules
 
@@ -175,6 +175,24 @@ A rig can include any synth in the app's library (Matriarch, DFAM, Grandmother, 
 - **Values** are the panel's travel: knobs 0 to 1 (−1 to 1 when bipolar), switches by position name. A library synth has no engine, so `value` and `explain` can't convert from Hz or seconds; say knob positions are a starting point.
 - **Free plan:** free accounts save rigs with up to 4 library synths (each placement counts; modules don't). `check` warns past 4.
 - **No network, or a sandbox that blocks the app:** `check` reads the snapshot instead and adds a note saying so. That's fine; don't ask the person to change network settings. Mention it in one line when you hand the rig over, since a synth added or renamed since the snapshot may differ. A synth in neither the app nor the snapshot is unchecked: say so. For a synth that isn't in the library (one pasted into someone's browser), get its package and pass it with `--synth`.
+
+### One library synth: write a patch
+
+When the request is one library synth and no modules (a Matriarch drone, a DFAM groove), write a **one-synth patch**, not a rig: `synth` at the top instead of `instances`, and cables by jack name alone. It pastes on that synth's own patch page (open the synth, start a patch, **Patch Data → Paste**) and in Rigs, which reads it as a rig of one. `check` reads it the same way.
+
+```json
+{
+  "format": "patchjson/2",
+  "synth": "moog-matriarch-692dc8",
+  "name": "Short Name",
+  "description": "One line: what it is.",
+  "controls": { "knobs": { "Filter Cutoff": 0.4 }, "toggles": { "Output VCA Mode": "Drone" } },
+  "cables": [{ "from": "Modulation Wave Out", "to": "Filter Cutoff 1 In", "color": "Control Blue" }],
+  "notes": "How to play it and what to turn."
+}
+```
+
+No `id`, `x` or `y`. As soon as a second synth or any module joins, it's a rig. `examples/matriarch-drone.json` is a complete one.
 
 Demo One (`example-instruments-demo-one`) is different: a drawn synth with its own engine. It's heard directly until its output jack is cabled.
 

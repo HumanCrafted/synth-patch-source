@@ -1,6 +1,6 @@
 {
   "name": "synth-patch",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Write Synth Patch rigs (patchjson/2) from a description of a sound: the standard modules and the app's library synths, exact control and jack names, patch values, cables, layout, and a checker that reads rigs the way the app does. Also module variants and new modules built from parts (synthjson/2).",
   "author": {
     "name": "Human Crafted",
