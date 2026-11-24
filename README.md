@@ -48,7 +48,7 @@ See [Demo One](examples/synths/example-instruments/demo-one/README.md) for its c
 
 ## Writing rigs with an assistant
 
-[`synth-patch-rigs`](plugins/synth-patch/skills/synth-patch-rigs/SKILL.md) is a skill that teaches a coding assistant to write rigs from a description ("an acid bassline that plays itself", "a lead I can play from the keyboard"), and module variants when a rig needs one. It carries the module names, values and docs from this repo, worked examples, and `rig.py`, which checks a rig the way the app reads it, explains its values in Hz and seconds, converts units to patch values and lays out the canvas.
+[`synth-patch-rigs`](plugins/synth-patch/skills/synth-patch-rigs/SKILL.md) is a skill that teaches a coding assistant to write rigs from a description ("an acid bassline that plays itself", "a lead I can play from the keyboard", "a patch sheet for my Matriarch and DFAM"), and module variants or new modules built from parts when a rig needs one. It carries the module names, values and docs from this repo, worked examples, and `rig.py`, which checks a rig the way the app reads it (fetching library synths' names from the app's public API), explains its values in Hz and seconds, converts units to patch values and lays out the canvas.
 
 In an assistant with plugin marketplaces, add this repo as one and install it:
 

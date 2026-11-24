@@ -1,0 +1,79 @@
+{
+  "format": "patchjson/2",
+  "name": "DFAM Drives Matriarch",
+  "description": "A patch sheet for two Moog synths: the DFAM's sequencer plays the Matriarch's oscillators and envelopes, and the DFAM's drums run through the Matriarch's delay.",
+  "tags": ["patch sheet", "sequence", "percussion"],
+  "instances": [
+    {
+      "id": "dfam",
+      "synth": "moog-dfam-53d6fb",
+      "x": 0,
+      "y": 0,
+      "controls": {
+        "knobs": {
+          "Tempo": 0.5,
+          "VCO 1 Level": 0.8,
+          "VCO 1 Frequency": 0.3,
+          "VCO 1 EG Amount": 0.6,
+          "VCO Decay": 0.35,
+          "Noise / EXT Level": 0.2,
+          "Cutoff": 0.55,
+          "Resonance": 0.3,
+          "VCF EG Amount": 0.5,
+          "VCF Decay": 0.4,
+          "VCA Decay": 0.4,
+          "Volume": 0.7,
+          "Seq 1 Pitch": 0.5,
+          "Seq 2 Pitch": 0.5,
+          "Seq 3 Pitch": 0.7,
+          "Seq 4 Pitch": 0.5,
+          "Seq 5 Pitch": 0.6,
+          "Seq 6 Pitch": 0.5,
+          "Seq 7 Pitch": 0.8,
+          "Seq 8 Pitch": 0.45,
+          "Seq 1 Velocity": 1,
+          "Seq 2 Velocity": 0.4,
+          "Seq 3 Velocity": 0.7,
+          "Seq 4 Velocity": 0.4,
+          "Seq 5 Velocity": 1,
+          "Seq 6 Velocity": 0.4,
+          "Seq 7 Velocity": 0.7,
+          "Seq 8 Velocity": 0.5
+        },
+        "toggles": { "VCF": "Low Pass", "Hard Sync": "Off" }
+      }
+    },
+    {
+      "id": "matriarch",
+      "synth": "moog-matriarch-692dc8",
+      "x": 3740,
+      "y": 0,
+      "controls": {
+        "rotarySwitches": { "Oscillator 1 Waveform": "Sawtooth", "Oscillator 2 Waveform": "Square" },
+        "knobs": {
+          "Mixer Oscillator 1": 0.8,
+          "Mixer Oscillator 2": 0.6,
+          "Oscillator 2 Frequency": 0.02,
+          "Filter Cutoff": 0.4,
+          "Filter Resonance 1": 0.3,
+          "Filter Envelope Amount": 0.4,
+          "EG Filter Decay": 0.3,
+          "EG Amplitude Decay": 0.35,
+          "Delay Time": 0.5,
+          "Delay Feedback": 0.4,
+          "Delay Mix": 0.35,
+          "Output Main Volume": 0.7
+        },
+        "sliders": { "EG Filter Sustain": 0.2, "EG Amplitude Sustain": 0.3 }
+      }
+    }
+  ],
+  "cables": [
+    { "from": "dfam/Pitch", "to": "matriarch/Oscillator 1 Pitch In", "color": "Control Blue" },
+    { "from": "dfam/Pitch", "to": "matriarch/Oscillator 2 Pitch In", "color": "Control Blue" },
+    { "from": "dfam/Trigger Out", "to": "matriarch/EG Filter Trigger In", "color": "Patch Green" },
+    { "from": "dfam/Trigger Out", "to": "matriarch/EG Amplitude Trigger In", "color": "Patch Green" },
+    { "from": "dfam/VCA", "to": "matriarch/Delay 1 In", "color": "Signal Orange" }
+  ],
+  "notes": "A patch sheet: library synths are silent in Synth Patch, so this shows the patch rather than playing it. Press **Run / Stop** on the DFAM. Its Pitch output plays the Matriarch's first two oscillators, a step at a time, and its Trigger Out fires both Matriarch envelopes, so the two play the same pattern. The DFAM's VCA output goes into the Matriarch's delay, so the drums echo with the bassline. Knob positions are a starting point; tune the DFAM's Seq Pitch knobs for the notes."
+}

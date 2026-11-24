@@ -1,6 +1,6 @@
 ---
 name: synth-patch-rigs
-description: Write Synth Patch rigs (patchjson/2), several modules on a canvas cabled into a patch that plays, from a description of a sound or someone's preferences, and variants of a module (synthjson/2) when a rig needs one. Use whenever someone wants a rig, a modular patch or patch JSON for Synth Patch (synthpatch.io), e.g. "make me an acid bassline rig", "patch something generative and ambient", "a lead I can play from my keyboard", "add an LFO on the filter", "a slower LFO module", or names Synth Patch modules (oscillator, filter, VCA, sequencer, Code). Also use it to check, fix or explain a rig that won't load, has problems listed, or makes no sound.
+description: Write Synth Patch rigs (patchjson/2), modules and library synths on a canvas cabled into a patch, from a description of a sound or someone's preferences, plus variants of a module and new modules built from parts (synthjson/2) when a rig needs one. Use whenever someone wants a rig, a modular patch, a patch sheet or patch JSON for Synth Patch (synthpatch.io), e.g. "make me an acid bassline rig", "patch something generative and ambient", "a lead I can play from my keyboard", "add an LFO on the filter", "a slower LFO module", "a dual VCA module", "patch my Matriarch into my DFAM", or names Synth Patch modules (oscillator, filter, VCA, sequencer, Code) or synths in its library. Also use it to check, fix or explain a rig that won't load, has problems listed, or makes no sound.
 ---
 
 # Writing Synth Patch rigs
@@ -13,11 +13,11 @@ Rigs and the sound engine are in preview in the app; the format is stable (`patc
 
 - **`references/module-names.md`**: every standard module's exact control and jack names, value group, range, default, engine mapping, panel size and behavior. Read it before writing any rig; it's the one file you always need.
 - `references/docs/rigs.md`: the rig format, how it's read, and the Writing-a-rig checklist.
-- `references/docs/engine.md`: signal levels (pitch is 1.0 per octave, 0 = middle C; audio −1 to 1; envelopes 0 to 1; gates 0 or 1) and the engine blocks, for variants.
+- `references/docs/engine.md`: signal levels (pitch is 1.0 per octave, 0 = middle C; audio −1 to 1; envelopes 0 to 1; gates 0 or 1) and the engine blocks, for variants and new modules.
 - `references/docs/synth-package.md` (Variants, Generated synths), `controls.md`, `patches.md`, `modules.md`, `parts.md`: the rest of the 2.0 docs.
 - `references/library/`: the module packages, Demo One and the parts manifest, byte for byte from the repo. `rig.py` reads them.
 - `references/examples/`: the two example rigs from the docs. `examples/`: worked rigs from prompts; `examples/README.md` says what each shows.
-- `scripts/rig.py`: `check`, `explain`, `value`, `controls`, `layout` and `check-synth`. Python 3, standard library only.
+- `scripts/rig.py`: `check`, `explain`, `value`, `controls`, `layout`, `check-synth` and `synths`. Python 3, standard library only. It fetches library synths (Matriarch, DFAM, …) from the app's public API when a rig names one; `--offline` skips that.
 
 Everything in `references/` is regenerated from the repo by `scripts/build_reference.py`; don't edit it by hand.
 
@@ -26,6 +26,8 @@ Everything in `references/` is regenerated from the repo by `scripts/build_refer
 ### 1. Pin down the sound
 
 From the request, decide: what it should sound like (bass, lead, pad, drone, percussion), **how it's played** (from the keys, by a sequence, or by itself), tempo and key if it's rhythmic or melodic, and any effects. Ask one short question only when the answer changes the patch and you can't pick a sensible default (for example, "played from the keyboard, or should it play itself?"). Otherwise choose and say what you chose.
+
+If the person names hardware (a Matriarch, a DFAM), read [Library synths](#library-synths) first: those panels are silent, so decide with them whether they want a patch sheet, sound from modules, or both.
 
 ### 2. Sketch the signal path
 
@@ -118,7 +120,7 @@ If you can't run Python, check by hand: every slug is in `module-names.md`; ever
 
 ### 7. Hand it over
 
-Give the rig as a `.json` file (named after the rig, kebab-case) or a JSON block, then say in a few lines what it does and what to turn. To load it in Synth Patch: open the Play canvas, then **Patch Data → Paste**, and paste the JSON. A rig with a variant needs the variant added first (below).
+Give the rig as a `.json` file (named after the rig, kebab-case) or a JSON block, then say in a few lines what it does and what to turn. To load it in Synth Patch: open the Play canvas, then **Patch Data → Paste**, and paste the JSON. A rig with a variant or a new module needs that package added first (below). A rig of library synths only is a patch sheet; say so (below).
 
 ## Variants
 
@@ -139,11 +141,42 @@ python3 scripts/rig.py check-synth my-variant.synth.json
 python3 scripts/rig.py check rig.json --synth my-variant.synth.json
 ```
 
-Hand over both files. In the Play canvas, the variant goes in first with **Add module → Paste synth JSON** (it's kept in that browser), then the rig with Patch Data → Paste. The rig names the variant by its slug.
+Hand over both files. In the Play canvas, the variant goes in first with **Add… → Paste synth JSON…** (it's kept in that browser), then the rig with Patch Data → Paste. The rig names the variant by its slug.
 
-## Other synths
+## New modules
 
-A rig can include any synth the app has, by slug (`moog-grandmother`, or the app's exact `moog-grandmother-a81c28`). This skill knows the standard modules and Demo One only. For another synth, get its `synth.json` (or exact control and jack names) from the person, and pass it with `--synth` so `check` can verify the names. Without it, `check` warns that the instance is unchecked; say so when you hand the rig over. A drawn synth with its own engine output is heard directly until its output jack is cabled; one without an engine shows but is silent.
+When composing standard modules and a small variant can't do the job, build a new module: a package of its own, with no `extends`, drawn by the app from parts. Use a variant when the module is close to a standard one (a different range, one more output). Build a new module when it isn't: two channels on one panel, a different set of jacks, blocks the standard modules don't combine.
+
+The rules (`references/docs/synth-package.md`, Generated synths; `examples/dual-vca.synth.json` is a complete one):
+
+- `"format": "synthjson/2"`, no `extends`, and its identity: `slug`, `name`, `manufacturer`, `model`, `description`, plus `"category": "Modular"` and `"tags": ["module"]`. Name it like a variant: `Custom` (or the person's name) as manufacturer, a slug that doesn't start with `synth-patch-`.
+- No `frame`, `thumbnail`, `placement`, or control `x`/`y`. Every graphic is a part from `references/library/parts.json`: `"parts:knob-moog-large"` for main knobs, `"parts:knob-solid-small"` for trims, `"parts:jack-hex-small"` for every jack (the part draws input or output from the jack's type). Copy a standard module's knob `config` (`minDegree`, `maxDegree`, `sensitivity`, `default`).
+- `control_config` is keyed by the kebab-case name, and every name is unique on the module, so a two-channel module suffixes them: `Gain A`, `Gain B`.
+- `panel.sections` lays it out, top to bottom: a section per channel or job, with an optional `label`, and rows of control names, left to right. Put knobs in one row and that section's jacks in the next. Controls the panel leaves out go in a last row.
+- `engine.blocks` is a **list** here (a variant's is an object): each block has an `id`, a `type`, `params` bound to controls, `inputs` from jacks (`{ "jack": "Input A" }`) or other blocks (`"vca-a.out"`), and `outputs` onto jacks. Leave out `engine.output`; a module is heard through a Speaker.
+- Every jack should be some block's input or output; `check-synth` warns about one that does nothing.
+
+Check it the same way, then lay out and check the rig against it. `check-synth` prints the panel size the app will draw, and `layout` uses it:
+
+```bash
+python3 scripts/rig.py check-synth dual-vca.synth.json
+python3 scripts/rig.py layout rig.json --row-width 7000 --write --synth dual-vca.synth.json
+python3 scripts/rig.py check rig.json --synth dual-vca.synth.json
+```
+
+Hand it over like a variant: **Add… → Paste synth JSON…** first, then the rig with Patch Data → Paste.
+
+## Library synths
+
+A rig can include any synth in the app's library (Matriarch, DFAM, Grandmother, …) by its slug. `python3 scripts/rig.py synths` lists them with their exact slugs (`synths moog` narrows it), and `controls <slug>` gives one's exact control and jack names. They come from the app's public API, so `check`, `explain` and `layout` check a library synth's names, values and panel size like a module's. Write the exact slug (`moog-matriarch-692dc8`), and copy names exactly, typos included: they're the names on the app's panel.
+
+- **Library synths are silent.** They show, take settings and cables, and make no sound; only modules make sound. A rig of only library synths is a patch diagram, a patch sheet for real hardware. `check` notes it; that's the right result when it's what the person asked for.
+- **When they want sound**, add modules that play along with the diagram, and say plainly which part sounds: a Sequencer into the DFAM's `Trigger In` that also plays an Oscillator → Filter → VCA → Speaker, or one Clock into both the hardware and the modules. A cable from a library synth's output into a module carries nothing; `check` warns about it.
+- **Values** are the panel's travel: knobs 0 to 1 (−1 to 1 when bipolar), switches by position name. A library synth has no engine, so `value` and `explain` can't convert from Hz or seconds; say knob positions are a starting point.
+- **Free plan:** free accounts save rigs with up to 4 library synths (each placement counts; modules don't). `check` warns past 4.
+- Without a network connection, `check` can't fetch them and warns that they're unchecked; say so when you hand the rig over. For a synth that isn't in the library (one pasted into someone's browser), get its package and pass it with `--synth`.
+
+Demo One (`example-instruments-demo-one`) is different: a drawn synth with its own engine. It's heard directly until its output jack is cabled.
 
 ## Fixing a rig
 

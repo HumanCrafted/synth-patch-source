@@ -43,6 +43,27 @@ A variant first: `custom-slow-lfo` extends `synth-patch-lfo`, moves the Rate ran
 - The rig names the variant by its slug. Check it with `rig.py check evolving-drone.json --synth slow-lfo.synth.json`.
 - To play it, add the variant with Add module → Paste synth JSON, then paste the rig.
 
+## [Two Voices](two-voices.json) and [Custom Dual VCA](dual-vca.synth.json)
+
+> A bassline and a bell part on the same clock, each with its own level, mixed into some reverb.
+
+A new module first: `custom-dual-vca` has no `extends`. It's built from parts, with two VCA channels (Gain, Initial Level, Input, CV Input, Output each) and a Mix Output of both, from two `vca` blocks and a `mixer` block. Then the rig: one Clock (200 BPM) steps two Sequencers in eighth notes at 100 BPM. The bass is a 16′ saw through a Filter into channel A; the bells are a 4′ triangle into channel B. Gain A at 1.3× and Gain B at 0.5× balance the two. Mix Output → Reverb → Speaker.
+
+- A new module, not a variant: no standard module has two channels on one panel.
+- Names are unique on the module, so the channels are suffixed: `Gain A`, `CV Input B`.
+- `check-synth` prints its panel size (726 × 1682), and `layout --synth` uses it.
+- To play it, add the module with Add… → Paste synth JSON…, then paste the rig.
+
+## [DFAM Drives Matriarch](dfam-drives-matriarch.json)
+
+> A patch sheet for my DFAM and Matriarch: the DFAM sequencing the Matriarch, with the drums going through its delay.
+
+Two library synths, no modules: the DFAM's Pitch output → both of the Matriarch's first two oscillators; Trigger Out → both Matriarch envelopes; the DFAM's VCA output → the Matriarch's Delay 1 In.
+
+- Library synths are silent, so this is a patch diagram. `check` says so as a note, not a warning.
+- Names and values were checked against the app's own panels, fetched by `rig.py` from the public API. Slugs are exact (`moog-dfam-53d6fb`).
+- Knob values are panel positions, not engine units; the notes call them a starting point.
+
 ## From the docs
 
 `references/examples/` holds the two rigs from the format docs: [Wavefolded Bass](../references/examples/wavefolded-bass.json), a Keyboard playing an Oscillator folded by a Code module, and [Demo One Echo](../references/examples/demo-one-echo.json), a drawn synth with its own keys and output, through a Delay module.

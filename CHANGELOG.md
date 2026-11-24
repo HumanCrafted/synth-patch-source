@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- **Rig-writing skill 1.1.0:** rigs with the app's library synths (Matriarch, DFAM, …). `rig.py` fetches their exact control and jack names from the app's public API, checks them like a module's, and has a `synths` command to list them. A rig of only library synths is a patch diagram, since they're silent. New modules built from parts with no `extends`, which `check-synth` checks (dead jacks, non-part graphics, panel size) and `layout` sizes the way the app draws them. Two new examples: a Dual VCA module with a rig that uses it, and a DFAM and Matriarch patch sheet.
 - **Rig-writing skill:** [`synth-patch-rigs`](plugins/synth-patch/skills/synth-patch-rigs/SKILL.md), installable as the `synth-patch` plugin from this repo's marketplace. Writes rigs and module variants from a description, with the module names and docs copied from this repo by `scripts/build_reference.py`, four worked examples, and `scripts/rig.py` to check, explain and lay out rigs. No format changes.
 
 ## 2.0.0 (2026-10-28)
