@@ -16,8 +16,11 @@ problems and zero errors means the app loads it and it makes a sound path.
 The synths it knows: the standard modules and Demo One, from
 references/library/ (copied from the synth-patch-source repo by
 build_reference.py), and the app's library synths (Matriarch, DFAM, …),
-fetched by slug from the app's public API when a rig names one. `synths` lists
-those. Pass any other synth or variant with --synth; --offline skips the API.
+fetched by slug from the app's public API when a rig names one. When the app
+can't be reached (no network, or a sandbox that only allows listed hosts), they
+come from references/library/app-synths.json, a snapshot of every library
+synth's names that build_reference.py writes. `synths` lists them. Pass any
+other synth or variant with --synth; --offline uses the snapshot on purpose.
 
 Standard library only, Python 3.8+.
 """
@@ -502,8 +505,48 @@ def frame_size(url):
 
 
 def is_library_synth(pkg):
-    """A synth from the app's library (fetched from its API), not a module."""
+    """A synth from the app's library (fetched from its API or the snapshot),
+    not a module."""
     return bool(pkg and pkg.get("_app"))
+
+
+# The snapshot: every library synth's names, value settings and panel size,
+# written by build_reference.py, for when the app can't be reached (a sandbox
+# that only allows listed hosts, no network). No coordinates or artwork.
+SNAPSHOT = LIBRARY / "app-synths.json"
+SNAPSHOT_CONFIG = ("positionNames", "valueRange", "default", "steps", "note", "keyType", "gate")
+
+
+def snapshot_entry(pkg):
+    """A fetched library synth, trimmed to what reading a rig needs."""
+    cc = {}
+    for key, c in (pkg.get("control_config") or {}).items():
+        if not (is_object(c) and isinstance(c.get("type"), str)) or key == "cableStyle":
+            continue
+        entry = {"name": c.get("name"), "type": c["type"]}
+        config = {k: v for k, v in (c.get("config") or {}).items() if k in SNAPSHOT_CONFIG}
+        if config:
+            entry["config"] = config
+        cc[key] = entry
+    out = {k: pkg[k] for k in ("slug", "name", "manufacturer", "model") if pkg.get(k)}
+    if pkg.get("_size"):
+        out["size"] = pkg["_size"]
+    out["control_config"] = cc
+    if pkg.get("engine"):
+        out["engine"] = pkg["engine"]
+    return out
+
+
+def load_snapshot():
+    """The snapshot's synths by slug, as packages, or {} without one."""
+    if not SNAPSHOT.exists():
+        return {}
+    out = {}
+    for s in json.loads(SNAPSHOT.read_text()).get("synths", []):
+        pkg = {k: v for k, v in s.items() if k != "size"}
+        pkg.update({"_app": True, "_snapshot": True, "_size": s.get("size")})
+        out[s["slug"]] = pkg
+    return out
 
 
 class Registry:
@@ -514,13 +557,21 @@ class Registry:
         self.synths, self.notes = {}, []
         self.online = online
         self._app_list = None
-        self.missing = {}  # ref → why it couldn't be fetched
+        self._snapshot = None
+        self.unreachable = None if online else "--offline"  # why the app can't be used
+        self.from_snapshot = []  # slugs read from the snapshot
+        self.missing = {}  # ref → why it couldn't be found
         for folder in ("modules", "synths"):
             for path in sorted((LIBRARY / folder).glob("*.json")):
                 pkg = json.loads(path.read_text())
                 self.synths[slug_for(pkg)] = pkg
         for path in extra:
             self.add(Path(path))
+
+    def snapshot(self):
+        if self._snapshot is None:
+            self._snapshot = load_snapshot()
+        return self._snapshot
 
     def app_list(self):
         """The app's listed library synths: [{slug, name, manufacturer, model}]."""
@@ -532,28 +583,21 @@ class Registry:
             self._app_list = [r for r in rows if is_object(r) and isinstance(r.get("slug"), str)]
         return self._app_list
 
-    def fetch(self, ref):
-        """Adds the app's library synth `ref` (exact slug, or without its id
-        suffix). Returns its exact slug, or None with the reason in self.missing."""
-        if ref in self.missing:
-            return None
-        if not self.online:
-            self.missing[ref] = "--offline"
-            return None
+    def fetch_live(self, ref):
+        """The library synth `ref` from the app, as a package. Raises
+        LookupError when the app says it has none, and URLError, OSError or
+        ValueError when the app can't be reached or read."""
+        listed = [r["slug"] for r in self.app_list()]
+        slug, _ = resolve_slug(ref, listed)
         try:
-            listed = [r["slug"] for r in self.app_list()]
-            slug, _ = resolve_slug(ref, listed)
             data = fetch_json(f"{APP}/api/synths/{urllib.parse.quote(slug or ref)}")
         except urllib.error.HTTPError as e:
-            self.missing[ref] = "not in the app's library" if e.code == 404 else f"the app answered {e.code}"
-            return None
-        except (urllib.error.URLError, OSError, ValueError) as e:
-            self.missing[ref] = f"couldn't reach {APP} ({getattr(e, 'reason', e)})"
-            return None
+            if e.code == 404:
+                raise LookupError("not in the app's library") from e
+            raise
         s = data.get("data") if is_object(data) else None
         if not is_object(s) or not is_object(s.get("control_config")):
-            self.missing[ref] = "the app sent no control_config"
-            return None
+            raise ValueError("the app sent no control_config")
         pkg = {k: s.get(k) for k in ("slug", "name", "manufacturer", "model", "description") if s.get(k)}
         pkg["control_config"] = s["control_config"]
         pkg["_app"] = True
@@ -562,8 +606,43 @@ class Registry:
             pkg["engine"] = engine
         if isinstance(s.get("frame_svg_path"), str):
             pkg["_size"] = frame_size(s["frame_svg_path"])
-        self.synths[pkg["slug"]] = pkg
-        return pkg["slug"]
+        return pkg
+
+    def fetch(self, ref):
+        """Adds the app's library synth `ref` (exact slug, or without its id
+        suffix): from the app, or from the snapshot when the app can't be
+        reached. Returns its exact slug, or None with the reason in self.missing."""
+        if ref in self.missing:
+            return None
+        if not self.unreachable:
+            try:
+                pkg = self.fetch_live(ref)
+                self.synths[pkg["slug"]] = pkg
+                return pkg["slug"]
+            except LookupError as e:
+                self.missing[ref] = str(e)
+                return None
+            except (urllib.error.URLError, OSError, ValueError) as e:
+                self.unreachable = f"couldn't reach {APP}: {getattr(e, 'reason', None) or e}"
+        snap = self.snapshot()
+        slug, _ = resolve_slug(ref, snap.keys())
+        if slug:
+            self.synths[slug] = snap[slug]
+            self.from_snapshot.append(slug)
+            return slug
+        self.missing[ref] = f"{self.unreachable}, and it isn't in this skill's snapshot of the library"
+        return None
+
+    def library_rows(self):
+        """(rows, note): the app's listed synths, or the snapshot's when the
+        app can't be reached."""
+        if not self.unreachable:
+            try:
+                return self.app_list(), None
+            except (urllib.error.URLError, OSError, ValueError) as e:
+                self.unreachable = f"couldn't reach {APP}: {getattr(e, 'reason', None) or e}"
+        rows = [{k: p.get(k) for k in ("slug", "name", "manufacturer", "model")} for p in self.snapshot().values()]
+        return rows, f"From this skill's snapshot of the library ({self.unreachable})."
 
     def ensure(self, refs):
         """Fetches the refs that aren't modules, Demo One or --synth files."""
@@ -879,6 +958,12 @@ def check_rig(data, registry):
     instances = []  # (id, pkg or None for unchecked, doc, values)
     seen = set()
     registry.ensure(inst.get("synth") for inst in raw["instances"] if is_object(inst))
+    snapped = [inst["synth"] for inst in raw["instances"] if is_object(inst) and resolve_slug(str(inst.get("synth")), registry.from_snapshot)[0]]
+    if snapped:
+        r.notes.append(
+            f"Checked {', '.join(dict.fromkeys(snapped))} against this skill's snapshot of the app's library "
+            f"({registry.unreachable}). A synth added or renamed in the app since then may differ."
+        )
     for i, inst in enumerate(raw["instances"]):
         if not is_object(inst) or not isinstance(inst.get("id"), str) or not inst["id"]:
             r.problems.append(f'Instance {i + 1} needs an "id".')
@@ -899,7 +984,7 @@ def check_rig(data, registry):
             why = registry.missing.get(inst["synth"], "not found")
             r.warnings.append(
                 f'Instance "{iid}": "{inst["synth"]}" is unchecked ({why}), so its controls and jacks are taken on trust. '
-                "Find the exact slug with `rig.py synths`, or pass a pasted synth's package with --synth."
+                "Find the exact slug with `rig.py synths`, or pass the synth's package with --synth."
             )
         elif problem:
             r.problems.append(f'Instance "{iid}": {problem}')
@@ -1364,16 +1449,15 @@ def cmd_check_synth(args):
 
 
 def cmd_synths(args):
-    registry = Registry(online=True)
-    try:
-        rows = registry.app_list()
-    except (urllib.error.URLError, OSError, ValueError) as e:
-        raise SystemExit(f"Couldn't list the app's synths from {APP}: {getattr(e, 'reason', e)}")
+    registry = Registry(online=not args.offline)
+    rows, note = registry.library_rows()
     want = (args.search or "").lower()
     shown = [r for r in rows if want in " ".join(str(r.get(k) or "") for k in ("slug", "name", "manufacturer", "model")).lower()]
     for r in sorted(shown, key=lambda r: r["slug"]):
         print(f"{r['slug']}  {r.get('name') or ''}")
     print(f"\n{len(shown)} of {len(rows)} library synths. `rig.py controls <slug>` gives one's exact names.")
+    if note:
+        print(note)
     return 0
 
 
@@ -1381,7 +1465,7 @@ def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
     synth_arg = dict(action="append", default=[], metavar="PKG.json", help="another synth package or variant (repeatable)")
-    offline_arg = dict(action="store_true", help="don't fetch library synths from the app")
+    offline_arg = dict(action="store_true", help="read library synths from the snapshot, not the app")
 
     s = sub.add_parser("check", help="check rigs as the app reads them")
     s.add_argument("rig", nargs="+")
@@ -1427,6 +1511,7 @@ def main(argv=None):
 
     s = sub.add_parser("synths", help="list the app's library synths and their exact slugs")
     s.add_argument("search", nargs="?", help="part of a name, maker or slug")
+    s.add_argument("--offline", **offline_arg)
     s.set_defaults(fn=cmd_synths)
 
     args = p.parse_args(argv)
