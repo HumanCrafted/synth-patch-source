@@ -10,7 +10,7 @@
       "name": "synth-patch",
       "source": "./plugins/synth-patch",
       "description": "Write Synth Patch rigs (patchjson/2), with modules and library synths, plus module variants and new modules, from a description of a sound, checked the way the app reads them.",
-      "version": "1.3.0"
+      "version": "1.3.1"
     }
   ]
 }

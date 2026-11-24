@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- **Rig-writing skill 1.3.1:** when the app can't be reached, the skill uses the library snapshot without mentioning it; it speaks up only for a synth that's in neither.
 - **Rig-writing skill 1.3.0:** one library synth and no modules is written as a one-synth patch (`synth`, `controls`, cables by jack name), which pastes on the synth's own patch page and in Rigs; `check` warns when such a request is written as a rig. New example: Matriarch Drone. Hand-over steps say Rigs, not the Play canvas.
 - **Patches:** a rig of exactly one instance, pasted as a patch, reads as that synth's patch (docs/patches.md).
 - **Rig-writing skill 1.2.0:** a snapshot of the app's library synths (`references/library/app-synths.json`: names, types, value settings and panel sizes, no coordinates or artwork), written by `build_reference.py` from the public API. `rig.py` falls back to it when the app can't be reached, as in sandboxes that only allow listed hosts, and notes that it did. `scripts/package_skill.py` refreshes it before zipping and stops if the app can't be reached (unless `--offline`).
