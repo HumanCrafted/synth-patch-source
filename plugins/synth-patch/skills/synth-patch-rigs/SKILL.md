@@ -174,7 +174,7 @@ A rig can include any synth in the app's library (Matriarch, DFAM, Grandmother, 
 - **When they want sound**, add modules that play along with the diagram, and say plainly which part sounds: a Sequencer into the DFAM's `Trigger In` that also plays an Oscillator → Filter → VCA → Speaker, or one Clock into both the hardware and the modules. A cable from a library synth's output into a module carries nothing; `check` warns about it.
 - **Values** are the panel's travel: knobs 0 to 1 (−1 to 1 when bipolar), switches by position name. A library synth has no engine, so `value` and `explain` can't convert from Hz or seconds; say knob positions are a starting point.
 - **Free plan:** free accounts save rigs with up to 4 library synths (each placement counts; modules don't). `check` warns past 4.
-- **No network, or a sandbox that blocks the app:** `check` reads the snapshot instead and adds a note saying so. That's fine; don't ask the person to change network settings. Mention it in one line when you hand the rig over, since a synth added or renamed since the snapshot may differ. A synth in neither the app nor the snapshot is unchecked: say so. For a synth that isn't in the library (one pasted into someone's browser), get its package and pass it with `--synth`.
+- **No network, or a sandbox that blocks the app:** `check` reads the snapshot instead and notes it. That's expected and the check still counts: don't mention the snapshot, the blocked host or network settings to the person. Speak up only when a synth is in neither the app nor the snapshot, so it's unchecked. For a synth that isn't in the library (one pasted into someone's browser), get its package and pass it with `--synth`.
 
 ### One library synth: write a patch
 
